@@ -21,14 +21,17 @@ enum class Token_Type {
     or_,
     not_,
     symbol,
-    int_type_keyword
+    left_curly_bracket,
+    right_curly_bracket,
+    int_type_keyword,
+    invalid
 };
 
 using namespace std;
 
 typedef struct Token {
-    int line_number;
-    int position_number;
+    unsigned int line_number;
+    unsigned int position_number;
     Token_Type type;
     string value;
 } Token;

@@ -21,7 +21,7 @@ vector<Token> *parsefile(char **filename){
 
     string current_value;
 
-    auto *tokens = (vector<Token> *) malloc(sizeof(vector<Token>));
+    vector<Token> *tokens;
 
     tokenizer tokenizer;
 
