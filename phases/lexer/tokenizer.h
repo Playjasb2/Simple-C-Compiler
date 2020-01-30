@@ -27,9 +27,13 @@ private:
     string current_stream_name;
     ifstream current_stream;
 
+    bool inComment = false;
+
     vector<Token> *token_stream;
 
     void add_token_to_stream(Token_Type type);
+
+    bool read_keyword_if_any();
 
     void read_current_file();
     void read_identifier();

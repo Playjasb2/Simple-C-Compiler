@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <utility>
+#include <map>
 
 #include "tokenizer.h"
 
@@ -51,20 +52,26 @@ void tokenizer::read_current_file() {
         line_char = line.c_str();
 
         while(*line_char != '\0') {
-
-            if(isalpha(*line_char) || *line_char == '_') {
+            if(inComment) {
+                this->read_comment();
+            }
+            else if(isalpha(*line_char) || *line_char == '_') {
                 this->read_identifier();
             }
             else if(isdigit(*line_char)) {
                 this->read_number();
             }
-            else if(*line_char == '/' && (*(line_char + 1) == '/' || *(line_char + 1) == '*')) {
+            else if(*line_char == '/' && *(line_char + 1) == '/') {
+                break;
+            }
+            else if(*line_char == '/' && *(line_char + 1) == '*') {
                 this->read_comment();
             }
             else if(*line_char == '+' || *line_char == '-' || *line_char == '*'
             || *line_char == '/' || *line_char == '=' || *line_char == '&'
             || *line_char == '|' || *line_char == '<' || *line_char == '>'
-            || *line_char == '(' || *line_char == ')') {
+            || *line_char == '(' || *line_char == ')' || *line_char == '!'
+            || *line_char == '%') {
                 this->read_symbol();
             }
             else if(*line_char == '"') {
@@ -75,6 +82,12 @@ void tokenizer::read_current_file() {
             }
             else if(*line_char == '}') {
                 this->add_token_to_stream(Token_Type::right_curly_bracket);
+            }
+            else if(*line_char == '(') {
+                this->add_token_to_stream(Token_Type::left_round_bracket);
+            }
+            else if(*line_char == ')') {
+                this->add_token_to_stream(Token_Type::right_round_bracket);
             }
             else if(*line_char == ';') {
                 this->add_token_to_stream(Token_Type::semicolon);
@@ -89,6 +102,21 @@ void tokenizer::read_current_file() {
     }
 }
 
+bool tokenizer::read_keyword_if_any() {
+    map<string, Token_Type> keyword_to_token_type
+    = {{"if" , Token_Type::if_},
+       {"else", Token_Type::else_},
+       {"int", Token_Type::int_type_keyword}};
+
+    if(keyword_to_token_type.find(current_word) == keyword_to_token_type.end()) {
+        return false;
+    }
+    else {
+        this->add_token_to_stream(keyword_to_token_type[current_word]);
+        return true;
+    }
+}
+
 void tokenizer::read_identifier() {
     while(*line_char != '\0') {
         if(isalnum(*line_char) || *line_char == '_') {
@@ -100,10 +128,7 @@ void tokenizer::read_identifier() {
         }
     }
 
-    if(current_word == "int") {
-        this->add_token_to_stream(Token_Type::int_type_keyword);
-    }
-    else {
+    if(!this->read_keyword_if_any()){
         this->add_token_to_stream(Token_Type::identifier);
     }
 
@@ -123,6 +148,51 @@ void tokenizer::read_number() {
     }
 
     this->add_token_to_stream(Token_Type::integer);
+
+    position_number += current_word.length() - 1;
+    current_word = "";
+}
+
+void tokenizer::read_comment() {
+    line_char += 2;
+    position_number += 2;
+
+    inComment = true;
+
+    while(*line_char != '\0' && *line_char != '*' && *(line_char + 1) != '/') {
+        line_char++;
+        position_number++;
+    }
+
+    line_char += 2;
+    position_number += 2;
+    inComment = false;
+}
+
+void tokenizer::read_string() {
+    bool gotEndQuote = false;
+
+    while(*line_char != '\0') {
+        if(*line_char == '"') {
+            gotEndQuote = true;
+            break;
+        }
+        else if(*line_char == '\\' && *(line_char + 1) == '"') {
+            current_word += "\"";
+            line_char += 2;
+        }
+        else {
+            current_word += *line_char;
+            line_char++;
+        }
+    }
+
+    if(gotEndQuote) {
+        this->add_token_to_stream(Token_Type::string);
+    }
+    else {
+        this->add_token_to_stream(Token_Type::invalid);
+    }
 
     position_number += current_word.length() - 1;
     current_word = "";
