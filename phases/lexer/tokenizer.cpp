@@ -5,7 +5,8 @@
 #include <string>
 #include <iostream>
 #include <utility>
-#include <map>
+
+#include <algorithm>
 
 #include "tokenizer.h"
 
@@ -22,6 +23,7 @@ void tokenizer::add_token_to_stream(Token_Type type) {
     new_token.position_number = this->position_number;
     new_token.value = this->current_word;
 
+    print("Adding token " + current_word + " with position: " + to_string(position_number));
     this->token_stream->push_back(new_token);
 }
 
@@ -44,7 +46,6 @@ void tokenizer::read_current_file() {
     line_number = 0;
 
     while(getline(current_stream, line)) {
-        print(line);
 
         line_number++;
         position_number = 1;
@@ -54,6 +55,10 @@ void tokenizer::read_current_file() {
         while(*line_char != '\0') {
             if(inComment) {
                 this->read_comment();
+            }
+            else if(*line_char == ' ' || *line_char == '\t') {
+                line_char++;
+                position_number++;
             }
             else if(isalpha(*line_char) || *line_char == '_') {
                 this->read_identifier();
@@ -70,44 +75,80 @@ void tokenizer::read_current_file() {
             else if(*line_char == '+' || *line_char == '-' || *line_char == '*'
             || *line_char == '/' || *line_char == '=' || *line_char == '&'
             || *line_char == '|' || *line_char == '<' || *line_char == '>'
-            || *line_char == '(' || *line_char == ')' || *line_char == '!'
-            || *line_char == '%') {
+            || *line_char == '!' || *line_char == '%') {
                 this->read_symbol();
             }
             else if(*line_char == '"') {
+                line_char++;
                 this->read_string();
             }
             else if(*line_char == '{') {
+                current_word += *line_char;
                 this->add_token_to_stream(Token_Type::left_curly_bracket);
+                current_word = "";
+                line_char++;
+                position_number++;
             }
             else if(*line_char == '}') {
+                current_word += *line_char;
                 this->add_token_to_stream(Token_Type::right_curly_bracket);
+                current_word = "";
+                line_char++;
+                position_number++;
             }
             else if(*line_char == '(') {
+                current_word += *line_char;
                 this->add_token_to_stream(Token_Type::left_round_bracket);
+                current_word = "";
+                line_char++;
+                position_number++;
             }
             else if(*line_char == ')') {
+                current_word += *line_char;
                 this->add_token_to_stream(Token_Type::right_round_bracket);
+                current_word = "";
+                line_char++;
+                position_number++;
             }
             else if(*line_char == ';') {
+                current_word += *line_char;
                 this->add_token_to_stream(Token_Type::semicolon);
+                current_word = "";
+                line_char++;
+                position_number++;
             }
             else {
                 this->read_invalid_token();
             }
-
-            line_char++;
-            position_number++;
         }
     }
 }
 
-bool tokenizer::read_keyword_if_any() {
-    map<string, Token_Type> keyword_to_token_type
-    = {{"if" , Token_Type::if_},
-       {"else", Token_Type::else_},
-       {"int", Token_Type::int_type_keyword}};
+void tokenizer::read_symbol() {
+    vector<char> symbols = {'+', '-', '*', '/', '%', '<', '>', '=', '!', '&', '|'};
 
+    while(*line_char != '\0') {
+        if(find(symbols.begin(), symbols.end(), *line_char) != symbols.end()) {
+            current_word += *line_char;
+            line_char++;
+        }
+        else {
+            break;
+        }
+    }
+
+    if(symbol_to_type.find(current_word) == keyword_to_token_type.end()) {
+        this->add_token_to_stream(Token_Type::invalid);
+    }
+    else {
+        this->add_token_to_stream(symbol_to_type[current_word]);
+    }
+
+    position_number += current_word.length();
+    current_word = "";
+}
+
+bool tokenizer::read_keyword_if_any() {
     if(keyword_to_token_type.find(current_word) == keyword_to_token_type.end()) {
         return false;
     }
@@ -132,7 +173,7 @@ void tokenizer::read_identifier() {
         this->add_token_to_stream(Token_Type::identifier);
     }
 
-    position_number += current_word.length() - 1;
+    position_number += current_word.length();
     current_word = "";
 }
 
@@ -149,7 +190,7 @@ void tokenizer::read_number() {
 
     this->add_token_to_stream(Token_Type::integer);
 
-    position_number += current_word.length() - 1;
+    position_number += current_word.length();
     current_word = "";
 }
 
@@ -194,6 +235,18 @@ void tokenizer::read_string() {
         this->add_token_to_stream(Token_Type::invalid);
     }
 
-    position_number += current_word.length() - 1;
+    line_char++;
+    position_number += current_word.length() + 3;
+    current_word = "";
+}
+
+void tokenizer::read_invalid_token() {
+    while(*line_char != '\0' || *line_char != ' ' || *line_char != '\t') {
+        current_word += *line_char;
+        line_char++;
+    }
+
+    this->add_token_to_stream(Token_Type::invalid);
+    position_number += current_word.length();
     current_word = "";
 }
