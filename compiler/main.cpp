@@ -3,19 +3,19 @@
 #include <algorithm>
 
 #include "main.h"
-#include "lexer.cpp"
+#include "lexer.h"
 
 using namespace std;
 
 void print_usage() {
-    cout << "USAGE:" << endl;
-    cout << "-h : display this message" << endl;
-    cout << "-D : [lexer/parser/semantics/codegen/optimizer] : debug options" << endl;
-    cout << "-v : get version number" << endl;
+    print("USAGE:");
+    print("-h : display this message");
+    print("-D : [lexer/parser/semantics/codegen/optimizer] : debug options");
+    print("-v : get version number");
 }
 
 void print_version() {
-    cout << "Jas Compiler Version: " << COMPILER_VERSION << endl;
+    print("Jas Compiler Version: " + to_string(COMPILER_VERSION));
 }
 
 int main(int argc, char *argv[]) {
@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
     }
 
     if(filename) {
-        parsefile(&filename);
+        lexer::parsefile(&filename);
     }
 
     return 0;

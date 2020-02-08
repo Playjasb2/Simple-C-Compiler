@@ -5,8 +5,6 @@
 #ifndef COMPILER_PROJECT_PRINT_H
 #define COMPILER_PROJECT_PRINT_H
 
-#endif //COMPILER_PROJECT_PRINT_H
-
 #include <iostream>
 #include <string>
 
@@ -16,3 +14,5 @@ template <typename T>
 void inline print(const T& output) {
     cout << output << endl;
 }
+
+#endif //COMPILER_PROJECT_PRINT_H

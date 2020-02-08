@@ -13,7 +13,9 @@ add_subdirectory(phases)
 add_subdirectory(compiler)
 add_subdirectory(tests)
 
-target_link_libraries(compiler lexer)
+target_link_libraries(compiler include lexer)
 target_link_libraries(tester lexer)
 
 add_compile_options(-Wall)
+set_target_properties(compiler PROPERTIES OUTPUT_NAME Simple-C)
+install(TARGETS compiler RENAME Simple-C DESTINATION bin)

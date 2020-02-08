@@ -10,5 +10,4 @@ class test_compiler {
 
 };
 
-
 #endif //COMPILER_PROJECT_TEST_COMPILER_H

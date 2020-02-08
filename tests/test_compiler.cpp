@@ -5,15 +5,13 @@
 #include <iostream>
 #include "test_compiler.h"
 
-#include "lexer.cpp"
+#include "lexer.h"
 
 using namespace std;
 
 int main(int argc, char *argv[]) {
-    cout << "Hello World" << endl;
-
     char *filename = "./test_cases/test.jas";
 
-    parsefile(&filename);
+    lexer::parsefile(&filename);
 
 }

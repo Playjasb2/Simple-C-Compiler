@@ -5,8 +5,6 @@
 #ifndef JAS_COMPILER_TOKEN_H
 #define JAS_COMPILER_TOKEN_H
 
-#endif //JAS_COMPILER_TOKEN_H
-
 #include <string>
 
 enum class Token_Type {
@@ -64,3 +62,5 @@ typedef struct Token {
     Token_Type type;
     string value;
 } Token;
+
+#endif //JAS_COMPILER_TOKEN_H

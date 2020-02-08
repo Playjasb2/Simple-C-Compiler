@@ -5,8 +5,6 @@
 #ifndef JAS_COMPILER_TOKENSTREAM_H
 #define JAS_COMPILER_TOKENSTREAM_H
 
-#endif //JAS_COMPILER_TOKENSTREAM_H
-
 #include <token.h>
 #include <vector>
 
@@ -26,3 +24,5 @@ public:
     Token *peakPrevious();
 
 };
+
+#endif //JAS_COMPILER_TOKENSTREAM_H

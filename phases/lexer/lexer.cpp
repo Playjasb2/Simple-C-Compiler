@@ -1,21 +1,16 @@
 //
 // Created by Jasmeet Brar on 2019-12-31.
 //
-
-#include <iostream>
-#include <fstream>
 #include <string>
 #include <vector>
 
-#include "tokenizer.h"
+#include "lexer.h"
 
 
 using namespace std;
 
-vector<Token> *parsefile(char **filename){
+vector<Token> *lexer::parsefile(char **filename){
     ifstream fileStream;
-
-    //fileStream.open((const char *) *filename);
 
     string line;
 

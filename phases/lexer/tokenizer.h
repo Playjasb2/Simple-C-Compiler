@@ -5,8 +5,6 @@
 #ifndef COMPILER_PROJECT_TOKENIZER_H
 #define COMPILER_PROJECT_TOKENIZER_H
 
-#endif //COMPILER_PROJECT_TOKENIZER_H
-
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -76,3 +74,5 @@ public:
     tokenizer();
     void process_file(string filename);
 };
+
+#endif //COMPILER_PROJECT_TOKENIZER_H
