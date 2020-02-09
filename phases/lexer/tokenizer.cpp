@@ -23,7 +23,6 @@ void tokenizer::add_token_to_stream(Token_Type type) {
     new_token.position_number = this->position_number;
     new_token.value = this->current_word;
 
-    print("Adding token " + current_word + " with position: " + to_string(position_number));
     this->token_stream->push_back(new_token);
 }
 
@@ -153,7 +152,16 @@ bool tokenizer::read_keyword_if_any() {
         return false;
     }
     else {
-        this->add_token_to_stream(keyword_to_token_type[current_word]);
+        auto current_type = keyword_to_token_type[current_word];
+
+        if(current_type == Token_Type::if_ && token_stream->back().type == Token_Type::else_) {
+            token_stream->pop_back();
+            this->add_token_to_stream(Token_Type::else_if_);
+        }
+        else {
+            this->add_token_to_stream(current_type);
+        }
+
         return true;
     }
 }
