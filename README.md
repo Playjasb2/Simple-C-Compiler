@@ -7,7 +7,7 @@ As of right now, the definition of this language isn't fully layed out, since mo
 Note: I have only tested the compiler on macOS and Linux; I have not tested it on Windows.
 
 ## Getting Started
----
+
 
 ### Prerequisites
 
@@ -35,6 +35,5 @@ To build the executables, you just need to execute `make` while you're in the bu
 You can optionally install the compiler in your system, if you wish to. You just need to execute `make install`, and it will install the `Simple-C` in the bin location of your system. Typically it would install it in a location like `/usr/local/bin/Simple-C`.
 
 ## Testing
----
 
 As of right now, I have not finished setting up a pipeline for testing. I currently have a test program that would look a specific test file, and run the lexer on it. I still have to set up more test cases that would test how each phases of the compiler interpret each feature of the source language. I also plan to test everything using CTest, and have CI be used in this project, where I may use Github Actions to automate the testing that would be done, every time I commit to the repo.
