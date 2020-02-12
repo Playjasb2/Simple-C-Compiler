@@ -9,18 +9,16 @@
 
 using namespace std;
 
-vector<Token> *lexer::parsefile(char **filename){
+tokenStream *lexer::parsefile(char **filename){
     ifstream fileStream;
 
     string line;
 
     string current_value;
 
-    vector<Token> *tokens;
-
     tokenizer tokenizer;
 
     tokenizer.process_file((string) *filename);
 
-    return tokens;
+    return tokenizer.get_token_stream();
 }

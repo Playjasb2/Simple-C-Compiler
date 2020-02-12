@@ -14,7 +14,7 @@ void print_usage() {
     print("-v : get version number");
 }
 
-void print_version() {
+void inline print_version() {
     print("Jas Compiler Version: " + to_string(COMPILER_VERSION));
 }
 

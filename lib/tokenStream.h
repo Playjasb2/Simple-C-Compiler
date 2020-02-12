@@ -14,14 +14,17 @@ private:
 
     vector<Token> *stream;
     int current_index = -1;
+    unsigned int length = 0;
 
 public:
 
-    tokenStream(vector<Token> *stream);
+    explicit tokenStream(vector<Token> *stream);
     Token *getNext();
     Token *getPrevious();
     Token *peakNext();
     Token *peakPrevious();
+
+    unsigned int get_length();
 
 };
 

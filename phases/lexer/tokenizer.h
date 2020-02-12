@@ -73,6 +73,7 @@ private:
 public:
     tokenizer();
     void process_file(string filename);
+    tokenStream *get_token_stream();
 };
 
 #endif //COMPILER_PROJECT_TOKENIZER_H

@@ -51,7 +51,8 @@ enum class Token_Type {
     left_curly_bracket,
     right_curly_bracket,
     int_type_keyword,
-    invalid
+    invalid,
+    eof
 };
 
 using namespace std;

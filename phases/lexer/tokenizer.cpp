@@ -121,6 +121,8 @@ void tokenizer::read_current_file() {
             }
         }
     }
+    current_word = "eof";
+    this->add_token_to_stream(Token_Type::eof);
 }
 
 void tokenizer::read_symbol() {
@@ -257,4 +259,13 @@ void tokenizer::read_invalid_token() {
     this->add_token_to_stream(Token_Type::invalid);
     position_number += current_word.length();
     current_word = "";
+}
+
+tokenStream *tokenizer::get_token_stream() {
+    if(token_stream->empty()){
+        return nullptr;
+    }
+    else {
+        return new tokenStream(token_stream);
+    }
 }

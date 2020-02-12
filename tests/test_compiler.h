@@ -5,7 +5,6 @@
 #ifndef COMPILER_PROJECT_TEST_COMPILER_H
 #define COMPILER_PROJECT_TEST_COMPILER_H
 
-
 class test_compiler {
 
 };
