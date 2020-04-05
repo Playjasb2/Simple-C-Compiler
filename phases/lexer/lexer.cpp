@@ -2,6 +2,7 @@
 // Created by Jasmeet Brar on 2019-12-31.
 //
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "lexer.h"
@@ -9,7 +10,7 @@
 
 using namespace std;
 
-tokenStream *lexer::parsefile(char **filename){
+tokenStream *lexer::parsefile(string filename){
     ifstream fileStream;
 
     string line;
@@ -18,7 +19,7 @@ tokenStream *lexer::parsefile(char **filename){
 
     tokenizer tokenizer;
 
-    tokenizer.process_file((string) *filename);
+    tokenizer.process_file(std::move(filename));
 
     return tokenizer.get_token_stream();
 }

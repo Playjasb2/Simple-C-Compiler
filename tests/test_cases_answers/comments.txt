@@ -1,0 +1,23 @@
+int, int_keyword
+a, identifier
+=, equal
+5, integer
+;, semicolon
+
+a, identifier
+=, equal
+3, integer
+;, semicolon
+
+a, identifier
+=, equal
+10, integer
+;, semicolon
+
+a, identifier
+=, equal
+20, integer
+;, semicolon
+
+eof, eof
+

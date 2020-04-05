@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
     }
 
     if(filename) {
-        lexer::parsefile(&filename);
+        lexer::parsefile(filename);
     }
 
     return 0;

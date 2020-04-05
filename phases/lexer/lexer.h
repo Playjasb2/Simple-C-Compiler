@@ -10,7 +10,9 @@
 using namespace std;
 
 namespace lexer {
-    tokenStream *parsefile(char **filename);
+    tokenStream *parsefile(string filename);
+
+
 }
 
 #endif //SIMPLE_C_COMPILER_LEXER_H

@@ -53,7 +53,7 @@ void tokenizer::read_current_file() {
 
         while(*line_char != '\0') {
             if(inComment) {
-                this->read_comment();
+                this->continue_to_read_comment();
             }
             else if(*line_char == ' ' || *line_char == '\t') {
                 line_char++;
@@ -158,6 +158,7 @@ bool tokenizer::read_keyword_if_any() {
 
         if(current_type == Token_Type::if_ && token_stream->back().type == Token_Type::else_) {
             token_stream->pop_back();
+            this->current_word = "else if";
             this->add_token_to_stream(Token_Type::else_if_);
         }
         else {
@@ -210,14 +211,20 @@ void tokenizer::read_comment() {
 
     inComment = true;
 
-    while(*line_char != '\0' && *line_char != '*' && *(line_char + 1) != '/') {
+    this->continue_to_read_comment();
+}
+
+void tokenizer::continue_to_read_comment() {
+    while(*line_char != '\0') {
+        if(*line_char == '*' && *(line_char + 1) == '/') {
+            inComment = false;
+            line_char += 2;
+            position_number += 2;
+            break;
+        }
         line_char++;
         position_number++;
     }
-
-    line_char += 2;
-    position_number += 2;
-    inComment = false;
 }
 
 void tokenizer::read_string() {

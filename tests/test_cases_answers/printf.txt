@@ -1,0 +1,7 @@
+printf, identifier
+(, left_round_bracket
+"Hello World!\n", string
+), right_round_bracket
+;, semicolon
+
+eof, eof

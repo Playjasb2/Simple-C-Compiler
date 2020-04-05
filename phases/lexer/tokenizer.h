@@ -68,6 +68,7 @@ private:
     void read_symbol();
     void read_string();
     void read_comment();
+    void continue_to_read_comment();
     void read_invalid_token();
 
 public:

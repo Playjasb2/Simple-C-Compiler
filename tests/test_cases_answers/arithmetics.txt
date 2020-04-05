@@ -1,0 +1,87 @@
+int, int_keyword
+a, identifier
+=, equal
+5, integer
+;, semicolon
+
+int, int_keyword
+b, identifier
+=, equal
+6, integer
+;, semicolon
+
+a, identifier
++=, plus_equal
+2, integer
+;, semicolon
+
+b, identifier
+-=, minus_equal
+4, integer
+;, semicolon
+
+c, identifier
+*=, multiply_equal
+8, integer
+;, semicolon
+
+d, identifier
+=, equal
+4, integer
+;, semicolon
+
+d, identifier
+/=, divide_equal
+1, integer
+;, semicolon
+
+a, identifier
+=, equal
+(, left_round_bracket
+5, integer
++, plus
+7, integer
+), right_round_bracket
+*, multiply
+3, integer
++, plus
+(, left_round_bracket
+8, integer
+/, divide
+(, left_round_bracket
+1, integer
++, plus
+1, integer
+), right_round_bracket
+-, minus
+1, integer
+), right_round_bracket
+;, semicolon
+
+a, identifier
+++, plus_plus
+;, semicolon
+
+++, plus_plus
+a, identifier
+;, semicolon
+
+b, identifier
+--, minus_minus
+;, semicolon
+
+--, minus_minus
+b, identifier
+;, semicolon
+
+b, identifier
+=, equal
+8, integer
+%, modulo
+3, integer
+;, semicolon
+
+eof, eof
+
+
+

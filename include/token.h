@@ -7,6 +7,8 @@
 
 #include <string>
 
+using namespace std;
+
 enum class Token_Type {
     integer = 1,
     string,
@@ -55,7 +57,7 @@ enum class Token_Type {
     eof
 };
 
-using namespace std;
+const unsigned int number_of_token_types = (const unsigned int) Token_Type::eof;
 
 typedef struct Token {
     unsigned int line_number;
