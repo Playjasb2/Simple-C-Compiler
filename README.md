@@ -1,4 +1,4 @@
-# Simple C Compiler
+# Simple C Compiler • ![C/C++ CI](https://github.com/Playjasb2/Simple-C-Compiler/workflows/C/C++%20CI/badge.svg)
 
 As a side project, I have decided to build a compiler that would compile a simplified version of C, that I call "Simple C", to x86-64.
 
@@ -14,7 +14,7 @@ Note: I have only tested the compiler on macOS and Linux; I have not tested it o
 In order to compile the compiler and optionally install it in your system, you need the following installed in your system:
 
 - g++ compiler that can compile C++20 source code
-- Boost 1.72 or later
+- Boost 1.65.1 or later
 - CMake version 3.15 or later
 
 [CMake](https://cmake.org) is a build system that I decided to use that would work cross-platform, and I found it to be quite useful for large projects, such as this, in order to help me easily define my build pipeline.
