@@ -2,11 +2,9 @@
 // Created by Jasmeet Brar on 2020-01-04.
 //
 
-#include <iostream>
 #include <vector>
 #include "test_compiler.h"
 #include <boost/program_options.hpp>
-#include <boost/algorithm/string.hpp>
 #include "lexer.h"
 #include "test_lexer.h"
 
@@ -18,7 +16,7 @@ int main(int argc, char *argv[]) {
 
     po::options_description desc("Allowed options");
     desc.add_options()
-            ("help", "produce help message")
+            ("help,h", "produce help message")
             ("mode,m", po::value<string>(), "mode")
             ("input-file", po::value< vector<string> >(), "input file")
             ;
@@ -35,15 +33,11 @@ int main(int argc, char *argv[]) {
         string filepath = vm["input-file"].as< vector<string> >().front();
         string mode = vm["mode"].as<string>();
 
-        print(filepath);
-        print(mode);
-
         if(!(exists_in_set(mode, test_mode))) {
             return 1;
         }
 
         // Handle file
-
         bool result = lexer_tester::test_file(filepath);
 
         if(result) {
@@ -51,10 +45,14 @@ int main(int argc, char *argv[]) {
         }
         else {
             print("FAIL");
+            return 1;
         }
     }
     else {
-        print("USAGE: ./tester <test file>");
+        print("USAGE: ./tester <flags> <test file>");
+        print("FLAGS:");
+        print("\t-help/-h : display this message");
+        print("\t-mode/-m : [lexer/parser/semantics/codegen/optimizer]");
     }
 
     return 0;

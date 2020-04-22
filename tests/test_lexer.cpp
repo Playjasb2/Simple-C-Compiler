@@ -86,16 +86,16 @@ bool lexer_tester::test_file(string filepath) {
 
         vector<string> result;
 
-        boost::split(result, line, boost::is_any_of(","));
+        int last_comma_index = line.find_last_of(',');
 
-        while(!result.empty()){
+        string value = line.substr(0,last_comma_index);
+        string type = line.substr(last_comma_index + 1);
 
-            string word = result.back();
-            boost::trim(word);
+        boost::trim(value);
+        boost::trim(type);
 
-            file_tokens.push_back(word);
-            result.pop_back();
-        }
+        file_tokens.push_back(type);
+        file_tokens.push_back(value);
     }
 
     reverse(file_tokens.begin(), file_tokens.end());
@@ -105,13 +105,22 @@ bool lexer_tester::test_file(string filepath) {
 
     bool errors = false;
 
+    string type;
+    string value;
+
     while(token) {
 
-        string type = file_tokens.back();
-        file_tokens.pop_back();
+        if(file_tokens.size() >= 2) {
+            type = file_tokens.back();
+            file_tokens.pop_back();
 
-        string value = file_tokens.back();
-        file_tokens.pop_back();
+            value = file_tokens.back();
+            file_tokens.pop_back();
+        }
+        else {
+            print("ERROR: Answer file doesn't have sufficient number of tokens");
+            return false;
+        }
 
         string error_message;
 
@@ -141,5 +150,5 @@ bool lexer_tester::test_file(string filepath) {
     }
 
 
-    return errors;
+    return !errors;
 }

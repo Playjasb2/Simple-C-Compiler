@@ -27,6 +27,7 @@ add_subdirectory(tests)
 target_link_libraries(compiler include lexer)
 target_link_libraries(tester lexer)
 
+target_link_libraries(compiler ${Boost_LIBRARIES})
 target_link_libraries(tester ${Boost_LIBRARIES})
 
 add_compile_options(-Wall)

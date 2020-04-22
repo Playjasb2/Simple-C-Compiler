@@ -1,71 +1,53 @@
 #include <iostream>
-#include <unistd.h>
 #include <algorithm>
-
+#include <boost/program_options.hpp>
 #include "main.h"
 #include "lexer.h"
 
 using namespace std;
-
-void print_usage() {
-    print("USAGE:");
-    print("-h : display this message");
-    print("-D : [lexer/parser/semantics/codegen/optimizer] : debug options");
-    print("-v : get version number");
-}
-
-void inline print_version() {
-    print("Jas Compiler Version: " + to_string(COMPILER_VERSION));
-}
+namespace po = boost::program_options;
 
 int main(int argc, char *argv[]) {
 
-    int op = 0;
-    char *debug_option = nullptr;
-    char *filename = nullptr;
+    po::options_description desc("Allowed options");
+    desc.add_options()
+            ("help", "produce help message")
+            ("version,v", "compiler version")
+            ("input-file", po::value< vector<string> >(), "input file")
+            ;
 
-    if(argc == 1) {
-        print_usage();
-        return 0;
+    po::positional_options_description p;
+    p.add("input-file", -1);
+
+    po::variables_map vm;
+    po::store(po::command_line_parser(argc, argv).
+            options(desc).positional(p).run(), vm);
+    po::notify(vm);
+
+    if(vm.count("version")) {
+        print("Jas Compiler Version: " + to_string(COMPILER_VERSION));
     }
+    else if(vm.count("input-file")) {
+        string filepath = vm["input-file"].as< vector<string> >().front();
 
+        // Lexical Analysis
+        tokenStream *token_stream = lexer::parsefile(filepath);
 
-    if(argc > 1 && argv[1][0] != '-') {
-        filename = argv[1];
-        optind++;
+        // Syntax Analysis
+
+        // Semantics Analysis
+
+        // Intermediate Representation
+
+        // Optimization
+
+        // Code Generation
     }
-
-    while((op = getopt(argc, argv, "hvD:")) != -1)
-    {
-        switch(op)
-        {
-            case 'D':
-            {
-                debug_option = optarg;
-                break;
-            }
-            case 'v':
-            {
-                print_version();
-                return 0;
-            }
-
-            default:
-            {
-                print_usage();
-                return 0;
-            }
-
-        }
-    }
-
-    if(debug_option != nullptr and find(begin(DEBUG_OPTIONS), end(DEBUG_OPTIONS), string(debug_option)) == end(DEBUG_OPTIONS)) {
-        print_usage();
-        return 0;
-    }
-
-    if(filename) {
-        lexer::parsefile(filename);
+    else {
+        print("USAGE: ./Simple-C <FLAGS> <path to file>");
+        print("FLAGS:");
+        print("\t-help/-h : display this message");
+        print("\t-version/-v : get compiler version");
     }
 
     return 0;

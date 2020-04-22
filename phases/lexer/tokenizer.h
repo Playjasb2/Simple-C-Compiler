@@ -21,6 +21,10 @@ private:
 
     unsigned int line_number = 0;
     unsigned int position_number = 0;
+
+    unsigned int last_line_number;
+    unsigned int last_position_number;
+
     const char *line_char = nullptr;
     string current_word;
     string current_stream_name;
@@ -71,10 +75,14 @@ private:
     void continue_to_read_comment();
     void read_invalid_token();
 
+    void advance_to_next_character();
+
 public:
     tokenizer();
     void process_file(string filename);
     tokenStream *get_token_stream();
+
+
 };
 
 #endif //COMPILER_PROJECT_TOKENIZER_H

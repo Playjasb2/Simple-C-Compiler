@@ -37,6 +37,6 @@ Token *tokenStream::peakPrevious() {
     return &this->stream->at(this->current_index - 1);
 }
 
-unsigned int tokenStream::get_length() {
+unsigned int tokenStream::get_length() const {
     return this->length;
 }

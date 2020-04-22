@@ -24,7 +24,7 @@ public:
     Token *peakNext();
     Token *peakPrevious();
 
-    unsigned int get_length();
+    unsigned int get_length() const;
 
 };
 
