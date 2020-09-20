@@ -30,7 +30,7 @@ target_link_libraries(tester lexer)
 target_link_libraries(compiler ${Boost_LIBRARIES})
 target_link_libraries(tester ${Boost_LIBRARIES})
 
-add_compile_options(-Wall)
+add_compile_options(-Wall -O2)
 set_target_properties(compiler PROPERTIES OUTPUT_NAME Simple-C)
 install(TARGETS compiler RENAME Simple-C DESTINATION bin)
 
