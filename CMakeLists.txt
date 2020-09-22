@@ -20,6 +20,7 @@ add_library(include INTERFACE)
 target_include_directories(include INTERFACE include/)
 
 add_subdirectory(lib)
+add_subdirectory(AST)
 add_subdirectory(phases)
 add_subdirectory(compiler)
 add_subdirectory(tests)
