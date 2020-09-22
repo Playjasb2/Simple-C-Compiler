@@ -4,8 +4,13 @@
 
 #include "ConditionalExpression.h"
 
+#include <utility>
+#include "ASTPrinter.h"
+
+using namespace AST;
+
 ConditionalExpression::ConditionalExpression(Conditional_operators op, Expression LHS, Expression RHS):
-BinaryExpression(conditional_operator_symbols[op], LHS, RHS){
+BinaryExpression(conditional_operator_symbols[op], std::move(LHS), std::move(RHS)){
 
 }
 

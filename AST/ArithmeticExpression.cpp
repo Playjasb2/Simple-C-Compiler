@@ -3,6 +3,9 @@
 //
 
 #include "ArithmeticExpression.h"
+#include "ASTPrinter.h"
+
+using namespace AST;
 
 ArithmeticExpression::ArithmeticExpression(Operator op, const Expression& LHS, const Expression& RHS):
 BinaryExpression(operator_symbols[op], LHS, RHS){

@@ -8,13 +8,18 @@
 #include "ASTNode.h"
 #include "StatementList.h"
 
-class Program: public ASTNode {
-private:
-    StatementList statementList = StatementList();
+namespace AST {
 
-public:
-    Program();
-    explicit Program(StatementList statementList);
-};
+    class Program : public ASTNode {
+
+    private:
+        StatementList statementList = StatementList();
+
+    public:
+        Program();
+        explicit Program(StatementList statementList);
+    };
+
+}
 
 #endif //SIMPLE_C_COMPILER_PROGRAM_H

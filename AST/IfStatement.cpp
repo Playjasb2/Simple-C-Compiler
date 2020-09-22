@@ -3,11 +3,15 @@
 //
 
 #include "IfStatement.h"
+#include "ASTPrinter.h"
 
 #include <utility>
 
+using namespace AST;
+
 IfStatement::IfStatement(ConditionalExpression conditional_expression, StatementList if_block, StatementList else_block)
-: conditional_expression(std::move(conditional_expression)), if_block(if_block), else_block(else_block){
+: conditional_expression(std::move(conditional_expression)), if_block(std::move(if_block)),
+else_block(std::move(else_block)){
 
 }
 

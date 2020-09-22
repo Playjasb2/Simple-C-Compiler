@@ -3,8 +3,11 @@
 //
 
 #include "IncrementDecrementExpression.h"
+#include "ASTPrinter.h"
 
 #include <utility>
+
+using namespace AST;
 
 IncrementDecrementExpression::IncrementDecrementExpression(string variable_name, IncrementDecrementOperator op,
                                                            bool isStatement): op(op), isStatement(isStatement),

@@ -7,24 +7,29 @@
 
 
 #include "BinaryExpression.h"
+#include "ASTPrinter.h"
 
-enum Operator {
-    add = 1,
-    subtract,
-    multiply,
-    divide,
-    modulo,
-    OPERATION_MAX
-};
+namespace AST {
 
-const char *operator_symbols[OPERATION_MAX] = {"+", "-", "*", "/", "%"};
+    enum Operator {
+        add = 1,
+        subtract,
+        multiply,
+        divide,
+        modulo,
+        OPERATION_MAX
+    };
 
-class ArithmeticExpression: public BinaryExpression {
+    const char *operator_symbols[OPERATION_MAX] = {"+", "-", "*", "/", "%"};
 
-public:
-    ArithmeticExpression(Operator operation_symbol, const Expression& LHS, const Expression& RHS);
-    void accept(ASTPrinter *printer) override;
-};
+    class ArithmeticExpression : public BinaryExpression {
+
+    public:
+        ArithmeticExpression(Operator operation_symbol, const Expression &LHS, const Expression &RHS);
+        void accept(ASTPrinter *printer) override;
+    };
+
+}
 
 
 #endif //SIMPLE_C_COMPILER_ARITHMETICEXPRESSION_H

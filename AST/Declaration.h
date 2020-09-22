@@ -12,19 +12,23 @@
 
 using namespace std;
 
-class Declaration: public VariableStatement {
+namespace AST {
 
-private:
-    Type variable_type;
-    string variable_name;
-    Expression value;
+    class Declaration : public VariableStatement {
 
-protected:
-    Declaration(Type variable_type, const string& variable_name, Expression value);
+    private:
+        Type variable_type;
+        string variable_name;
+        Expression value;
 
-public:
-    string getVariableType();
-    Expression getVariableValue();
-};
+    protected:
+        Declaration(Type variable_type, const string &variable_name, Expression value);
+
+    public:
+        string getVariableType();
+        Expression getVariableValue();
+    };
+
+}
 
 #endif //SIMPLE_C_COMPILER_DECLARATION_H

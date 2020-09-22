@@ -4,6 +4,8 @@
 
 #include "ASTPrinter.h"
 
+using namespace AST;
+
 void ASTPrinter::visit(StatementList *statementList) {
 
 }

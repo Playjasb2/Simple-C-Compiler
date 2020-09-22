@@ -3,8 +3,11 @@
 //
 
 #include "AssignmentStatement.h"
+#include "ASTPrinter.h"
 
 #include <utility>
+
+using namespace AST;
 
 AssignmentStatement::AssignmentStatement(string variable_name, Assignment_Operator op, Expression expression):
 op(op), expression(std::move(expression)), VariableStatement(std::move(variable_name)){

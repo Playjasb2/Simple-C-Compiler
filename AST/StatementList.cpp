@@ -3,6 +3,9 @@
 //
 
 #include "StatementList.h"
+#include "ASTPrinter.h"
+
+using namespace AST;
 
 StatementList::StatementList()= default;
 

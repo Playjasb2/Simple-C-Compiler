@@ -7,19 +7,25 @@
 
 #include <vector>
 #include "Statement.h"
+#include "ASTNode.h"
+#include "ASTPrinter.h"
 
 using namespace std;
 
-class StatementList: public ASTNode {
+namespace AST {
 
-private:
-    vector<Statement> statements = vector<Statement>();
+    class StatementList : public ASTNode {
 
-public:
-    explicit StatementList();
-    void addStatement(const Statement& statement);
-    unsigned int getNumOfStatements();
-    void accept(ASTPrinter *printer) override;
-};
+    private:
+        vector<Statement> statements = vector<Statement>();
+
+    public:
+        explicit StatementList();
+        void addStatement(const Statement &statement);
+        unsigned int getNumOfStatements();
+        void accept(ASTPrinter *printer) override;
+    };
+
+}
 
 #endif //SIMPLE_C_COMPILER_STATEMENTLIST_H

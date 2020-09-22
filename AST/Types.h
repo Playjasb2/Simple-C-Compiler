@@ -9,14 +9,18 @@
 
 using namespace std;
 
-enum Type {
-    Integer = 1,
-    String,
-    Boolean,
-    Void,
-    TYPE_MAX
-};
+namespace AST {
 
-const char *Type_Names[Type::TYPE_MAX] = {"Integer", "String", "Boolean", "Void"};
+    enum Type {
+        Integer = 1,
+        String,
+        Boolean,
+        Void,
+        TYPE_MAX
+    };
+
+    const char *Type_Names[Type::TYPE_MAX] = {"Integer", "String", "Boolean", "Void"};
+
+}
 
 #endif //SIMPLE_C_COMPILER_TYPES_H

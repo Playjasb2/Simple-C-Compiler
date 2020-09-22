@@ -10,15 +10,20 @@
 
 using namespace std;
 
-class VariableStatement: public Statement {
-private:
-    string variable_name;
+namespace AST {
 
-protected:
-    explicit VariableStatement(string variable_name);
+    class VariableStatement : public Statement {
 
-public:
-    string getVariableName();
-};
+    private:
+        string variable_name;
+
+    protected:
+        explicit VariableStatement(string variable_name);
+
+    public:
+        string getVariableName();
+    };
+
+}
 
 #endif //SIMPLE_C_COMPILER_VARIABLESTATEMENT_H

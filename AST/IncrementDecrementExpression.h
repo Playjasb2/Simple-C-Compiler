@@ -8,24 +8,29 @@
 
 #include "UnaryExpression.h"
 #include "VariableStatement.h"
+#include "ASTPrinter.h"
 
-enum IncrementDecrementOperator {
-    plus_plus_prefix = 1,
-    plus_plus_postfix,
-    minus_minus_prefix,
-    minus_minus_postfix
-};
+namespace AST {
 
-class IncrementDecrementExpression: public UnaryExpression<string>, public VariableStatement {
+    enum IncrementDecrementOperator {
+        plus_plus_prefix = 1,
+        plus_plus_postfix,
+        minus_minus_prefix,
+        minus_minus_postfix
+    };
 
-private:
-    IncrementDecrementOperator op;
-    bool isStatement;
+    class IncrementDecrementExpression : public UnaryExpression<string>, public VariableStatement {
 
-public:
-    IncrementDecrementExpression(string variable_name, IncrementDecrementOperator op, bool isStatement);
-    void accept(ASTPrinter *printer) override;
-};
+    private:
+        IncrementDecrementOperator op;
+        bool isStatement;
+
+    public:
+        IncrementDecrementExpression(string variable_name, IncrementDecrementOperator op, bool isStatement);
+        void accept(ASTPrinter *printer) override;
+    };
+
+}
 
 
 #endif //SIMPLE_C_COMPILER_INCREMENTDECREMENTEXPRESSION_H

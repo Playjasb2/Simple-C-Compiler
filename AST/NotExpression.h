@@ -7,16 +7,21 @@
 
 
 #include "UnaryExpression.h"
+#include "ASTPrinter.h"
 
-class NotExpression: public UnaryExpression<Expression> {
+namespace AST {
 
-private:
-    Expression expression;
+    class NotExpression : public UnaryExpression<Expression> {
 
-public:
-    explicit NotExpression(Expression expression);
-    void accept(ASTPrinter *printer) override;
-};
+    private:
+        Expression expression;
+
+    public:
+        explicit NotExpression(Expression expression);
+        void accept(ASTPrinter *printer) override;
+    };
+
+}
 
 
 #endif //SIMPLE_C_COMPILER_NOTEXPRESSION_H

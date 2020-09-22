@@ -4,7 +4,12 @@
 
 #include "NotExpression.h"
 
-NotExpression::NotExpression(Expression expression): UnaryExpression(expression){
+#include <utility>
+#include "ASTPrinter.h"
+
+using namespace AST;
+
+NotExpression::NotExpression(Expression expression): UnaryExpression(std::move(expression)){
 
 }
 

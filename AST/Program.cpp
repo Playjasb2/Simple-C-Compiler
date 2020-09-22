@@ -6,6 +6,8 @@
 
 #include <utility>
 
+using namespace AST;
+
 Program::Program() = default;
 
 Program::Program(StatementList statementList): statementList(std::move(statementList)){

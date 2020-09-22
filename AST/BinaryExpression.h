@@ -10,20 +10,24 @@
 
 using namespace std;
 
-class BinaryExpression: public Expression {
+namespace AST {
 
-private:
-    Expression LHS;
-    Expression RHS;
-    string operation_symbol;
+    class BinaryExpression : public Expression {
 
-protected:
-    BinaryExpression(string operation_symbol, Expression LHS, Expression RHS);
+    private:
+        Expression LHS;
+        Expression RHS;
+        string operation_symbol;
 
-public:
-    Expression getLeft();
-    Expression getRight();
-    string getOperationSymbol();
-};
+    protected:
+        BinaryExpression(string operation_symbol, Expression LHS, Expression RHS);
+
+    public:
+        Expression getLeft();
+        Expression getRight();
+        string getOperationSymbol();
+    };
+
+}
 
 #endif //SIMPLE_C_COMPILER_BINARYEXPRESSION_H

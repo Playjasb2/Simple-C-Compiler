@@ -5,8 +5,10 @@
 #include <utility>
 #include "BinaryExpression.h"
 
+using namespace AST;
+
 BinaryExpression::BinaryExpression(string operation_symbol, Expression LHS, Expression RHS):
-operation_symbol(std::move(operation_symbol)), LHS(LHS), RHS(RHS){
+operation_symbol(std::move(operation_symbol)), LHS(std::move(LHS)), RHS(std::move(RHS)){
 
 }
 

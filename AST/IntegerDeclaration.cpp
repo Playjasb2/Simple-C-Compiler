@@ -4,8 +4,13 @@
 
 #include "IntegerDeclaration.h"
 
+#include <utility>
+#include "ASTPrinter.h"
+
+using namespace AST;
+
 IntegerDeclaration::IntegerDeclaration(const string& variable_name, Expression value):
-Declaration(Type::Integer, variable_name, value) {
+Declaration(Type::Integer, variable_name, std::move(value)) {
 
 }
 

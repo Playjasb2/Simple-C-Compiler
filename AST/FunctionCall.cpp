@@ -3,8 +3,11 @@
 //
 
 #include "FunctionCall.h"
+#include "ASTPrinter.h"
 
 #include <utility>
+
+using namespace AST;
 
 FunctionCall::FunctionCall(string function_name): function_name(std::move(function_name)){
 

@@ -6,13 +6,18 @@
 #define SIMPLE_C_COMPILER_INTEGERDECLARATION_H
 
 #include "Declaration.h"
+#include "ASTPrinter.h"
 
-class IntegerDeclaration: public Declaration {
+namespace AST {
 
-public:
-    IntegerDeclaration(const string& variable_name, Expression value);
-    void accept(ASTPrinter *printer) override;
-};
+    class IntegerDeclaration : public Declaration {
+
+    public:
+        IntegerDeclaration(const string &variable_name, Expression value);
+        void accept(ASTPrinter *printer) override;
+    };
+
+}
 
 
 #endif //SIMPLE_C_COMPILER_INTEGERDECLARATION_H

@@ -7,8 +7,11 @@
 
 #include "ASTNode.h"
 
-class Statement: public ASTNode {
+namespace AST {
 
-};
+    class Statement: ASTNode {
+
+    };
+}
 
 #endif //SIMPLE_C_COMPILER_STATEMENT_H

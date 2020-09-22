@@ -7,8 +7,12 @@
 
 #include "ASTNode.h"
 
-class Expression: public ASTNode {
+namespace AST {
 
-};
+    class Expression : public ASTNode {
+
+    };
+
+}
 
 #endif //SIMPLE_C_COMPILER_EXPRESSION_H

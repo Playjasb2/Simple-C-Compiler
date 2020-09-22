@@ -6,6 +6,8 @@
 
 #include <utility>
 
+using namespace AST;
+
 VariableStatement::VariableStatement(string variable_name): variable_name(std::move(variable_name)){
 
 }

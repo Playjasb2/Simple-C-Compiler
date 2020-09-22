@@ -10,9 +10,15 @@
 
 using namespace std;
 
-class ASTNode {
+namespace AST {
 
-public:
-    virtual void accept(ASTPrinter *printer) {}
-};
+    class ASTNode {
+
+    public:
+        virtual void accept(ASTPrinter *printer) {
+
+        }
+    };
+}
+
 #endif //SIMPLE_C_COMPILER_ASTNODE_H

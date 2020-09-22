@@ -10,18 +10,22 @@
 
 #include "StatementList.h"
 #include "ConditionalExpression.h"
+#include "ASTPrinter.h"
 
-class IfStatement: public Statement {
+namespace AST {
 
-private:
-    ConditionalExpression conditional_expression;
-    StatementList if_block;
-    StatementList else_block;
+    class IfStatement : public Statement {
 
-public:
-    IfStatement(ConditionalExpression conditional_expression, StatementList if_block, StatementList else_block);
-    void accept(ASTPrinter *printer) override;
-};
+    private:
+        ConditionalExpression conditional_expression;
+        StatementList if_block;
+        StatementList else_block;
 
+    public:
+        IfStatement(ConditionalExpression conditional_expression, StatementList if_block, StatementList else_block);
+        void accept(ASTPrinter *printer) override;
+    };
+
+}
 
 #endif //SIMPLE_C_COMPILER_IFSTATEMENT_H
