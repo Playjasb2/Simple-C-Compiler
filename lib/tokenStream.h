@@ -23,6 +23,8 @@ public:
     Token *getPrevious();
     Token *peakNext();
     Token *peakPrevious();
+    Token *peakNthNextToken(signed int n);
+    void goBack(signed int amount);
 
     unsigned int get_length() const;
 

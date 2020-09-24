@@ -15,6 +15,6 @@
 using namespace std;
 
 const int DEBUG_OPTIONS_NUM = 5;
-const vector<string> DEBUG_OPTIONS = {"lexer", "parser", "semantics", "codegen", "optimizer"};
+const char *DEBUG_OPTIONS[] = {"lexer", "parser", "semantics", "codegen", "optimizer"};
 
 #endif //JAS_COMPILER_MAIN_H

@@ -13,11 +13,14 @@ namespace AST {
     class Program : public ASTNode {
 
     private:
-        StatementList statementList = StatementList();
+        StatementList statementList;
+        vector<string> errors  = vector<string>();
 
     public:
         Program();
         explicit Program(StatementList statementList);
+        explicit Program(StatementList statementList, vector<string> errors);
+        void accept(ASTPrinter *printer) override;
     };
 
 }

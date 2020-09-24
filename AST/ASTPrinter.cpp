@@ -6,6 +6,10 @@
 
 using namespace AST;
 
+void ASTPrinter::visit(Program *program) {
+
+}
+
 void ASTPrinter::visit(StatementList *statementList) {
 
 }

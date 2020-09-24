@@ -40,3 +40,15 @@ Token *tokenStream::peakPrevious() {
 unsigned int tokenStream::get_length() const {
     return this->length;
 }
+
+void tokenStream::goBack(signed int amount) {
+    if(amount > 0 && this->current_index - amount >= 0) {
+        this->current_index -= amount;
+    }
+}
+
+Token *tokenStream::peakNthNextToken(signed int n) {
+    if(n > 0 && this->current_index + n < this->length) {
+        return &this->stream->at(this->current_index + n);
+    }
+}

@@ -9,12 +9,13 @@
 
 using namespace AST;
 
-FunctionCall::FunctionCall(string function_name): function_name(std::move(function_name)){
+FunctionCall::FunctionCall(string function_name, bool isStatement): function_name(std::move(function_name)),
+isStatement(isStatement){
 
 }
 
-FunctionCall::FunctionCall(string function_name, vector<Expression> arguments):
-function_name(std::move(function_name)), arguments(std::move(arguments)){
+FunctionCall::FunctionCall(string function_name, vector<Expression> arguments, bool isStatement):
+function_name(std::move(function_name)), arguments(std::move(arguments)), isStatement(isStatement){
 
 }
 

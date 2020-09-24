@@ -12,6 +12,7 @@ using namespace std;
 
 namespace AST {
 
+    class Program;
     class Statement;
     class StatementList;
     class AssignmentStatement;
@@ -30,6 +31,7 @@ namespace AST {
     class ASTPrinter {
 
     public:
+        void visit(Program *program);
         void visit(StatementList *statementList);
         void visit(AssignmentStatement *statement);
         void visit(IfStatement *statement);

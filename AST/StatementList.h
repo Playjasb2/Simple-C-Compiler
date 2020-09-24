@@ -21,8 +21,10 @@ namespace AST {
 
     public:
         explicit StatementList();
+        explicit StatementList(const Statement& statement);
         void addStatement(const Statement &statement);
         unsigned int getNumOfStatements();
+        vector<Statement> getStatements();
         void accept(ASTPrinter *printer) override;
     };
 

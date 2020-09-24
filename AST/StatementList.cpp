@@ -9,6 +9,10 @@ using namespace AST;
 
 StatementList::StatementList()= default;
 
+StatementList::StatementList(const Statement& statement) {
+    this->statements.push_back(statement);
+}
+
 
 void StatementList::addStatement(const Statement& statement) {
     this->statements.push_back(statement);
@@ -21,3 +25,9 @@ unsigned int StatementList::getNumOfStatements() {
 void StatementList::accept(ASTPrinter *printer) {
     printer->visit(this);
 }
+
+vector<Statement> StatementList::getStatements() {
+    return this->statements;
+}
+
+

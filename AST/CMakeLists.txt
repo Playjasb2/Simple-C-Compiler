@@ -32,7 +32,9 @@ add_library(
         ASTPrinter.cpp
         ASTPrinter.h
         Program.h
-        Program.cpp)
+        Program.cpp
+        NullExpressionStatement.h
+)
 
 target_include_directories(AST PUBLIC ".")
 

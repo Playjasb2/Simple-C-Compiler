@@ -13,3 +13,14 @@ Program::Program() = default;
 Program::Program(StatementList statementList): statementList(std::move(statementList)){
 
 }
+
+Program::Program(StatementList statementList, vector<string> errors):
+statementList(std::move(statementList)), errors(std::move(errors)){
+
+}
+
+void Program::accept(ASTPrinter *printer) {
+    printer->visit(this);
+}
+
+

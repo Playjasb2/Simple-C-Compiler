@@ -1,4 +1,4 @@
-//
+ //
 // Created by Jasmeet Brar on 2020-01-12.
 //
 
@@ -13,7 +13,7 @@
 using namespace std;
 
 tokenizer::tokenizer() {
-    this->token_stream = new vector<Token>;
+    this->token_stream = new vector<Token>();
 }
 
 void tokenizer::add_token_to_stream(Token_Type type) {

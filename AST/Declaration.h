@@ -18,11 +18,11 @@ namespace AST {
 
     private:
         Type variable_type;
-        string variable_name;
         Expression value;
 
     protected:
-        Declaration(Type variable_type, const string &variable_name, Expression value);
+        Declaration(Type variable_type, string variable_name);
+        Declaration(Type variable_type, string variable_name, Expression value);
 
     public:
         string getVariableType();
