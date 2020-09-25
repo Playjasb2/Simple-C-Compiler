@@ -19,14 +19,14 @@ namespace AST {
         minus_minus_postfix
     };
 
-    class IncrementDecrementExpression : public UnaryExpression<string>, public VariableStatement {
+    class IncrementDecrementExpression : public UnaryExpression, public VariableStatement {
 
     private:
         IncrementDecrementOperator op;
         bool isStatement;
 
     public:
-        IncrementDecrementExpression(string variable_name, IncrementDecrementOperator op, bool isStatement);
+        IncrementDecrementExpression(Variable *variable, IncrementDecrementOperator op, bool isStatement);
         void accept(ASTPrinter *printer) override;
     };
 

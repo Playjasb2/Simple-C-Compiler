@@ -16,6 +16,7 @@ namespace AST {
         String,
         Boolean,
         Void,
+        Unknown,
         TYPE_MAX
     };
 

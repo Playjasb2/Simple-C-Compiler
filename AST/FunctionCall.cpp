@@ -9,20 +9,26 @@
 
 using namespace AST;
 
-FunctionCall::FunctionCall(string function_name, bool isStatement): function_name(std::move(function_name)),
-isStatement(isStatement){
+FunctionCall::FunctionCall(Function *function, bool isStatement): function(function), isStatement(isStatement){
 
 }
 
-FunctionCall::FunctionCall(string function_name, vector<Expression> arguments, bool isStatement):
-function_name(std::move(function_name)), arguments(std::move(arguments)), isStatement(isStatement){
+FunctionCall::FunctionCall(Function *function, vector<Expression *> *arguments, vector<Token *> *argument_tokens,
+                           bool isStatement): function(function), arguments(arguments),
+                           argument_tokens(argument_tokens), isStatement(isStatement) {
 
 }
 
-vector<Expression> FunctionCall::getArguments() {
+vector<Expression *> *FunctionCall::getArguments() {
     return this->arguments;
 }
 
 void FunctionCall::accept(ASTPrinter *printer) {
     printer->visit(this);
+}
+
+FunctionCall::~FunctionCall() {
+    delete this->function;
+    delete this->arguments;
+    delete this->argument_tokens;
 }

@@ -8,10 +8,14 @@
 
 using namespace AST;
 
-VariableStatement::VariableStatement(string variable_name): variable_name(std::move(variable_name)){
+VariableStatement::VariableStatement(Variable *variable): variable(variable){
 
 }
 
-string VariableStatement::getVariableName() {
-    return this->variable_name;
+Variable *VariableStatement::getVariable() {
+    return this->variable;
+}
+
+VariableStatement::~VariableStatement() {
+    delete this->variable;
 }

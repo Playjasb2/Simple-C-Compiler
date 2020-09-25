@@ -12,7 +12,7 @@ void parser::addErrors(const string& error) {
 
 Program *parser::parseStream(tokenStream *token_stream) {
     parser::stream = token_stream;
-    parser::errors = vector<string>();
+    parser::errors = new vector<string>();
     std::pair<StatementList, bool> statementList = parseStatementList();
 
     if(!statementList.second) {

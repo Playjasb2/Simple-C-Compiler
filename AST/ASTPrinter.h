@@ -24,8 +24,6 @@ namespace AST {
     class FunctionCall;
     class NotExpression;
     class Expression;
-
-    template<typename T>
     class UnaryExpression;
 
     class ASTPrinter {
@@ -41,8 +39,7 @@ namespace AST {
         void visit(ConditionalExpression *expression);
         void visit(FunctionCall *functionCall);
         void visit(NotExpression *expression);
-        void visit(UnaryExpression<string> *expression);
-        void visit(UnaryExpression<Expression> *expression);
+        void visit(UnaryExpression *expression);
 
     };
 }

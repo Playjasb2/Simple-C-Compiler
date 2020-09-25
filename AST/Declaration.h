@@ -8,6 +8,7 @@
 #include <string>
 #include "Types.h"
 #include "Expression.h"
+#include "Variable.h"
 #include "VariableStatement.h"
 
 using namespace std;
@@ -17,16 +18,15 @@ namespace AST {
     class Declaration : public VariableStatement {
 
     private:
-        Type variable_type;
-        Expression value;
+        Expression *value;
 
     protected:
-        Declaration(Type variable_type, string variable_name);
-        Declaration(Type variable_type, string variable_name, Expression value);
+        explicit Declaration(Variable *variable);
+        ~Declaration() override;
+        Declaration(Variable *variable, Expression *value);
 
     public:
-        string getVariableType();
-        Expression getVariableValue();
+        Expression *getVariableValue();
     };
 
 }

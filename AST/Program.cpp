@@ -10,17 +10,23 @@ using namespace AST;
 
 Program::Program() = default;
 
-Program::Program(StatementList statementList): statementList(std::move(statementList)){
+Program::Program(StatementList *statementList): statementList(statementList){
 
 }
 
-Program::Program(StatementList statementList, vector<string> errors):
-statementList(std::move(statementList)), errors(std::move(errors)){
+Program::Program(StatementList *statementList, vector<string> *errors):
+statementList(statementList), errors(errors){
 
 }
 
 void Program::accept(ASTPrinter *printer) {
     printer->visit(this);
 }
+
+Program::~Program() {
+    delete this->statementList;
+    delete this->errors;
+}
+
 
 

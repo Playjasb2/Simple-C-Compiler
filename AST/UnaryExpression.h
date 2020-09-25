@@ -6,6 +6,7 @@
 #define SIMPLE_C_COMPILER_UNARYEXPRESSION_H
 
 #include <string>
+#include <utility>
 #include "Expression.h"
 #include "ASTPrinter.h"
 
@@ -13,25 +14,19 @@ using namespace std;
 
 namespace AST {
 
-    template<typename T>
     class UnaryExpression : public Expression {
 
     private:
-        T subject;
+        Expression *expression;
 
     protected:
-        explicit UnaryExpression(T subject) : subject(subject) {
-
-        }
+        explicit UnaryExpression(Expression *subject);
+        ~UnaryExpression() override;
 
     public:
-        T getSubject() {
-            return this->subject;
-        }
+        Expression *getExpression();
 
-        void accept(ASTPrinter *printer) override {
-            printer->visit(this);
-        }
+        void accept(ASTPrinter *printer) override;
     };
 
 }

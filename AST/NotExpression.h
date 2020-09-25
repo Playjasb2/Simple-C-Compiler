@@ -11,13 +11,10 @@
 
 namespace AST {
 
-    class NotExpression : public UnaryExpression<Expression> {
-
-    private:
-        Expression expression;
+    class NotExpression : public UnaryExpression {
 
     public:
-        explicit NotExpression(Expression expression);
+        explicit NotExpression(Expression *expression);
         void accept(ASTPrinter *printer) override;
     };
 

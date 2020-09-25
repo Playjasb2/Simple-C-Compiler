@@ -15,17 +15,17 @@ namespace AST {
     class BinaryExpression : public Expression {
 
     private:
-        Expression LHS;
-        Expression RHS;
-        string operation_symbol;
+        Expression *LHS;
+        Expression *RHS;
+        Token *operator_token;
 
     protected:
-        BinaryExpression(string operation_symbol, Expression LHS, Expression RHS);
+        BinaryExpression(Token *operator_token, Expression *LHS, Expression *RHS);
+        ~BinaryExpression() override;
 
     public:
-        Expression getLeft();
-        Expression getRight();
-        string getOperationSymbol();
+        Expression *getLHS();
+        Expression *getRHS();
     };
 
 }

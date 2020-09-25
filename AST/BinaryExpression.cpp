@@ -7,21 +7,22 @@
 
 using namespace AST;
 
-BinaryExpression::BinaryExpression(string operation_symbol, Expression LHS, Expression RHS):
-operation_symbol(std::move(operation_symbol)), LHS(std::move(LHS)), RHS(std::move(RHS)){
+BinaryExpression::BinaryExpression(Token *operator_token, Expression *LHS, Expression *RHS): LHS(LHS), RHS(RHS),
+operator_token(operator_token) {
 
 }
 
-Expression BinaryExpression::getLeft() {
+Expression *BinaryExpression::getLHS() {
     return this->LHS;
 }
 
-Expression BinaryExpression::getRight() {
+Expression *BinaryExpression::getRHS() {
     return this->RHS;
 }
 
-string BinaryExpression::getOperationSymbol() {
-    return this->operation_symbol;
+BinaryExpression::~BinaryExpression() {
+    delete this->LHS;
+    delete this->RHS;
 }
 
 

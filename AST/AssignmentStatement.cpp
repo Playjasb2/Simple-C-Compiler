@@ -9,12 +9,13 @@
 
 using namespace AST;
 
-AssignmentStatement::AssignmentStatement(string variable_name, Assignment_Operator op, Expression expression):
-op(op), expression(std::move(expression)), VariableStatement(std::move(variable_name)){
+AssignmentStatement::AssignmentStatement(Variable *variable, Assignment_Operator op, Expression *expression,
+                                         Token *operator_token): expression(expression), op(op),
+                                         operator_token(operator_token), VariableStatement(variable) {
 
 }
 
-Expression AssignmentStatement::getExpression() {
+Expression *AssignmentStatement::getExpression() {
     return this->expression;
 }
 
@@ -25,3 +26,9 @@ Assignment_Operator AssignmentStatement::getAssignmentOperator() {
 void AssignmentStatement::accept(ASTPrinter *printer) {
     printer->visit(this);
 }
+
+AssignmentStatement::~AssignmentStatement() {
+    delete this->expression;
+}
+
+

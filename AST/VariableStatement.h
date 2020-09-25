@@ -7,6 +7,7 @@
 
 #include <string>
 #include "Statement.h"
+#include "Variable.h"
 
 using namespace std;
 
@@ -15,13 +16,15 @@ namespace AST {
     class VariableStatement : public Statement {
 
     private:
-        string variable_name;
+        Variable *variable;
 
     protected:
-        explicit VariableStatement(string variable_name);
+        explicit VariableStatement(Variable *variable);
+        ~VariableStatement() override;
 
     public:
-        string getVariableName();
+        Variable *getVariable();
+
     };
 
 }

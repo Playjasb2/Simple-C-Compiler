@@ -13,8 +13,8 @@ namespace AST {
     class IntegerDeclaration : public Declaration {
 
     public:
-        explicit IntegerDeclaration(const string &variable_name);
-        IntegerDeclaration(const string &variable_name, Expression value);
+        explicit IntegerDeclaration(Variable *variable);
+        IntegerDeclaration(Variable *variable, Expression *value);
         void accept(ASTPrinter *printer) override;
     };
 

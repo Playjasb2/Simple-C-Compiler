@@ -10,7 +10,7 @@
 
 namespace AST {
 
-    enum Conditional_operators {
+    enum Conditional_Operators {
         equal_equal = 1,
         not_equal,
         less_than,
@@ -22,13 +22,16 @@ namespace AST {
         CONDITIONAL_OPERATORS_MAX
     };
 
-    const char *conditional_operator_symbols[Conditional_operators::CONDITIONAL_OPERATORS_MAX] =
+    const char *conditional_operator_symbols[Conditional_Operators::CONDITIONAL_OPERATORS_MAX] =
             {"==", "!=", "<", "<=", ">", ">=", "&&", "||"};
 
     class ConditionalExpression : public BinaryExpression {
 
+    private:
+        Conditional_Operators op;
+
     public:
-        ConditionalExpression(Conditional_operators op, Expression LHS, Expression RHS);
+        ConditionalExpression(Conditional_Operators op, Expression *LHS, Expression *RHS, Token *operator_token);
         void accept(ASTPrinter *printer) override;
     };
 

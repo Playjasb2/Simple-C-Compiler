@@ -18,7 +18,7 @@ class parser {
 private:
     static Program *program;
     static tokenStream *stream;
-    static vector<string> errors;
+    static vector<string> *errors;
 
     static void addErrors(const string& error);
 

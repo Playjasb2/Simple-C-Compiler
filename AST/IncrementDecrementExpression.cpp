@@ -9,13 +9,15 @@
 
 using namespace AST;
 
-IncrementDecrementExpression::IncrementDecrementExpression(string variable_name, IncrementDecrementOperator op,
+IncrementDecrementExpression::IncrementDecrementExpression(Variable *variable, IncrementDecrementOperator op,
                                                            bool isStatement): op(op), isStatement(isStatement),
-                                                           UnaryExpression<string>(std::move(variable_name)),
-                                                                   VariableStatement(variable_name){
+                                                           UnaryExpression(variable), VariableStatement(variable) {
+
 
 }
+
 
 void IncrementDecrementExpression::accept(ASTPrinter *printer) {
     printer->visit(this);
 }
+

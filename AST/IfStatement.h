@@ -17,12 +17,13 @@ namespace AST {
     class IfStatement : public Statement {
 
     private:
-        ConditionalExpression conditional_expression;
-        StatementList if_block;
-        StatementList else_block;
+        ConditionalExpression *conditional_expression;
+        StatementList *if_block;
+        StatementList *else_block;
 
     public:
-        IfStatement(ConditionalExpression conditional_expression, StatementList if_block, StatementList else_block);
+        IfStatement(ConditionalExpression *conditional_expression, StatementList *if_block, StatementList *else_block);
+        ~IfStatement() override;
         void accept(ASTPrinter *printer) override;
     };
 

@@ -9,13 +9,11 @@
 
 using namespace AST;
 
-IntegerDeclaration::IntegerDeclaration(const string& variable_name, Expression value):
-Declaration(Type::Integer, variable_name, std::move(value)) {
+IntegerDeclaration::IntegerDeclaration(Variable *variable): Declaration(variable){
 
 }
 
-IntegerDeclaration::IntegerDeclaration(const string &variable_name):
-Declaration(Type::Integer, variable_name){
+IntegerDeclaration::IntegerDeclaration(Variable *variable, Expression *value): Declaration(variable, value) {
 
 }
 

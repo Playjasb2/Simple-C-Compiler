@@ -17,14 +17,15 @@ namespace AST {
     class StatementList : public ASTNode {
 
     private:
-        vector<Statement> statements = vector<Statement>();
+        vector<Statement *> *statements = new vector<Statement *>();
 
     public:
         explicit StatementList();
-        explicit StatementList(const Statement& statement);
-        void addStatement(const Statement &statement);
+        explicit StatementList(Statement *statement);
+        ~StatementList() override;
+        void addStatement(Statement *statement);
         unsigned int getNumOfStatements();
-        vector<Statement> getStatements();
+        vector<Statement *> *getStatements();
         void accept(ASTPrinter *printer) override;
     };
 

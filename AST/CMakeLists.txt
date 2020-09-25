@@ -33,8 +33,15 @@ add_library(
         ASTPrinter.h
         Program.h
         Program.cpp
-        NullExpressionStatement.h
-)
+        Variable.cpp
+        Variable.h
+        Integer.h
+        Integer.cpp
+        String.cpp
+        String.h
+        Function.cpp
+        Function.h
+        UnaryExpression.cpp)
 
 target_include_directories(AST PUBLIC ".")
 

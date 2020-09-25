@@ -21,12 +21,14 @@ namespace AST {
     class AssignmentStatement: public VariableStatement {
 
     private:
-        Expression expression;
+        Expression *expression;
         Assignment_Operator op;
+        Token *operator_token;
 
     public:
-        AssignmentStatement(string variable_name, Assignment_Operator op, Expression expression);
-        Expression getExpression();
+        AssignmentStatement(Variable *variable, Assignment_Operator op, Expression *expression, Token *operator_token);
+        ~AssignmentStatement() override;
+        Expression *getExpression();
         Assignment_Operator getAssignmentOperator();
         void accept(ASTPrinter *printer) override;
     };

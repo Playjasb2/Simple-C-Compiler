@@ -5,6 +5,7 @@
 #ifndef SIMPLE_C_COMPILER_ASTNODE_H
 #define SIMPLE_C_COMPILER_ASTNODE_H
 
+#include <token.h>
 #include <string>
 #include "ASTPrinter.h"
 
@@ -18,6 +19,7 @@ namespace AST {
         virtual void accept(ASTPrinter *printer) {
 
         }
+        virtual ~ASTNode()= default;
     };
 }
 

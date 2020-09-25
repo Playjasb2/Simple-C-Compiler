@@ -23,9 +23,11 @@ namespace AST {
     const char *operator_symbols[OPERATION_MAX] = {"+", "-", "*", "/", "%"};
 
     class ArithmeticExpression : public BinaryExpression {
+    private:
+        Operator op;
 
     public:
-        ArithmeticExpression(Operator operation_symbol, const Expression &LHS, const Expression &RHS);
+        ArithmeticExpression(Operator op, Expression *LHS, Expression *RHS, Token *operator_token);
         void accept(ASTPrinter *printer) override;
     };
 
