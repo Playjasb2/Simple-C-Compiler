@@ -5,26 +5,35 @@
 #ifndef SIMPLE_C_COMPILER_ASTPRINTER_H
 #define SIMPLE_C_COMPILER_ASTPRINTER_H
 
-#include <string>
-
-
-using namespace std;
+//#include <string>
+//#include "Program.h"
+//#include "AssignmentStatement.h"
+//#include "IfStatement.h"
+//#include "IntegerDeclaration.h"
+//#include "IncrementDecrementExpression.h"
+//#include "ArithmeticExpression.h"
+//#include "FunctionCall.h"
+//#include "NotExpression.h"
 
 namespace AST {
 
-    class Program;
+    class ASTNode;
+    class Expression;
     class Statement;
+    class VariableStatement;
+    class UnaryExpression;
+    class BinaryExpression;
+    class ArithmeticExpression;
+    class ConditionalExpression;
+    class Declaration;
+    class Program;
     class StatementList;
     class AssignmentStatement;
     class IfStatement;
     class IntegerDeclaration;
     class IncrementDecrementExpression;
-    class ArithmeticExpression;
-    class ConditionalExpression;
     class FunctionCall;
     class NotExpression;
-    class Expression;
-    class UnaryExpression;
 
     class ASTPrinter {
 

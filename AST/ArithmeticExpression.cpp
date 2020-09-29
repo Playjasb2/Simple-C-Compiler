@@ -3,7 +3,6 @@
 //
 
 #include "ArithmeticExpression.h"
-#include "ASTPrinter.h"
 
 using namespace AST;
 

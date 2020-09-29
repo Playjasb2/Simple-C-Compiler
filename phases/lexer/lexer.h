@@ -7,11 +7,8 @@
 
 #include "tokenizer.h"
 
-using namespace std;
-
 namespace lexer {
-    tokenStream *parsefile(string filename);
-
+    tokenStream *parsefile(std::string filename);
 
 }
 

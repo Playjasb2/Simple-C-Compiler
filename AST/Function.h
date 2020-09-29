@@ -15,11 +15,11 @@ namespace AST {
     class Function : public Expression {
     private:
         Type type;
-        string name;
         Token *token;
 
     public:
-        Function(string name, Type type, Token *token);
+        Function(Type type, Token *token);
+        std::string getName();
     };
 
 }

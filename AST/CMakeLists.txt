@@ -37,8 +37,8 @@ add_library(
         Variable.h
         Integer.h
         Integer.cpp
-        String.cpp
-        String.h
+        StringValue.cpp
+        StringValue.h
         Function.cpp
         Function.h
         UnaryExpression.cpp)

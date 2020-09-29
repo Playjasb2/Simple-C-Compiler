@@ -10,10 +10,11 @@
 
 #include "tokenizer.h"
 
-using namespace std;
 
 tokenizer::tokenizer() {
-    this->token_stream = new vector<Token>();
+    this->token_stream = new std::vector<Token>();
+    this->last_line_number = 0;
+    this->last_position_number = 0;
 }
 
 void tokenizer::add_token_to_stream(Token_Type type) {
@@ -26,7 +27,7 @@ void tokenizer::add_token_to_stream(Token_Type type) {
     this->token_stream->push_back(new_token);
 }
 
-void tokenizer::process_file(string filename) {
+void tokenizer::process_file(std::string filename) {
     current_stream_name = move(filename);
     current_stream.open(current_stream_name);
 
@@ -45,7 +46,7 @@ void inline tokenizer::advance_to_next_character() {
 }
 
 void tokenizer::read_current_file() {
-    string line;
+    std::string line;
 
     line_number = 0;
 
@@ -95,30 +96,35 @@ void tokenizer::read_current_file() {
                 this->add_token_to_stream(Token_Type::left_curly_bracket);
                 current_word = "";
                 this->advance_to_next_character();
+                this->last_position_number++;
             }
             else if(*line_char == '}') {
                 current_word += *line_char;
                 this->add_token_to_stream(Token_Type::right_curly_bracket);
                 current_word = "";
                 this->advance_to_next_character();
+                this->last_position_number++;
             }
             else if(*line_char == '(') {
                 current_word += *line_char;
                 this->add_token_to_stream(Token_Type::left_round_bracket);
                 current_word = "";
                 this->advance_to_next_character();
+                this->last_position_number++;
             }
             else if(*line_char == ')') {
                 current_word += *line_char;
                 this->add_token_to_stream(Token_Type::right_round_bracket);
                 current_word = "";
                 this->advance_to_next_character();
+                this->last_position_number++;
             }
             else if(*line_char == ';') {
                 current_word += *line_char;
                 this->add_token_to_stream(Token_Type::semicolon);
                 current_word = "";
                 this->advance_to_next_character();
+                this->last_position_number++;
             }
             else {
                 this->read_invalid_token();
@@ -130,7 +136,7 @@ void tokenizer::read_current_file() {
 }
 
 void tokenizer::read_symbol() {
-    vector<char> symbols = {'+', '-', '*', '/', '%', '<', '>', '=', '!', '&', '|'};
+    std::vector<char> symbols = {'+', '-', '*', '/', '%', '<', '>', '=', '!', '&', '|'};
 
     last_line_number = line_number;
     last_position_number = position_number;

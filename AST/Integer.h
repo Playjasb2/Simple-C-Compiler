@@ -13,11 +13,11 @@ namespace AST {
 
     class Integer : public Expression {
     private:
-        string value;
         Token *token;
 
     public:
-        explicit Integer(string value, Token *token);
+        explicit Integer(Token *token);
+        std::string getValue();
     };
 
 }

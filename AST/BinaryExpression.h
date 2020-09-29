@@ -8,8 +8,6 @@
 #include <string>
 #include "Expression.h"
 
-using namespace std;
-
 namespace AST {
 
     class BinaryExpression : public Expression {

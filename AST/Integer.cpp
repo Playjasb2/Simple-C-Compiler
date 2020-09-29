@@ -6,7 +6,11 @@
 
 #include <utility>
 
-Integer::Integer(string value, Token *token): value(std::move(value)), token(token){
+Integer::Integer(Token *token): token(token){
 
+}
+
+std::string Integer::getValue() {
+    return this->token->value;
 }
 

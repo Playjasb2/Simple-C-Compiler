@@ -4,8 +4,10 @@
 
 #include "Function.h"
 
-#include <utility>
+Function::Function(Type type, Token *token): type(type), token(token){
 
-Function::Function(string name, Type type, Token *token): name(std::move(name)), type(type), token(token){
+}
 
+std::string Function::getName() {
+    return this->token->value;
 }

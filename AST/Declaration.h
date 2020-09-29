@@ -11,8 +11,6 @@
 #include "Variable.h"
 #include "VariableStatement.h"
 
-using namespace std;
-
 namespace AST {
 
     class Declaration : public VariableStatement {

@@ -6,7 +6,6 @@
 #define SIMPLE_C_COMPILER_CONDITIONALEXPRESSION_H
 
 #include "BinaryExpression.h"
-#include "ASTPrinter.h"
 
 namespace AST {
 
@@ -18,12 +17,8 @@ namespace AST {
         greater_than,
         greater_than_or_equal_to,
         and_,
-        or_,
-        CONDITIONAL_OPERATORS_MAX
+        or_
     };
-
-    const char *conditional_operator_symbols[Conditional_Operators::CONDITIONAL_OPERATORS_MAX] =
-            {"==", "!=", "<", "<=", ">", ">=", "&&", "||"};
 
     class ConditionalExpression : public BinaryExpression {
 

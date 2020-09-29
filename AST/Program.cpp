@@ -4,8 +4,6 @@
 
 #include "Program.h"
 
-#include <utility>
-
 using namespace AST;
 
 Program::Program() = default;
@@ -14,7 +12,7 @@ Program::Program(StatementList *statementList): statementList(statementList){
 
 }
 
-Program::Program(StatementList *statementList, vector<string> *errors):
+Program::Program(StatementList *statementList, std::vector<std::string> *errors):
 statementList(statementList), errors(errors){
 
 }

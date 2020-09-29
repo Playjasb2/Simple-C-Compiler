@@ -9,7 +9,7 @@
 #include <algorithm>
 #include "lexer.h"
 
-using namespace std;
+
 namespace po = boost::filesystem;
 
 const char * token_type_names[] = {
@@ -60,36 +60,36 @@ const char * token_type_names[] = {
     "eof"
 };
 
-bool lexer_tester::test_file(string filepath) {
+bool lexer_tester::test_file(std::string filepath) {
     po::path p(filepath);
 
-    string path_to_answers = p.parent_path().string() + "_answers/" + p.stem().string() + ".txt";
+    std::string path_to_answers = p.parent_path().string() + "_answers/" + p.stem().string() + ".txt";
 
-    ifstream current_stream;
+    std::ifstream current_stream;
     current_stream.open(path_to_answers);
 
     if(!current_stream.is_open()) {
-        string message = "Error: Cannot open " + path_to_answers;
+        std::string message = "Error: Cannot open " + path_to_answers;
         print(message);
         return false;
     }
 
     tokenStream *token_stream = lexer::parsefile(filepath);
 
-    vector<string> file_tokens;
+    std::vector<std::string> file_tokens;
 
-    string line;
+    std::string line;
 
     while(getline(current_stream,line)) {
 
         if(line.empty()) continue;
 
-        vector<string> result;
+        std::vector<std::string> result;
 
         int last_comma_index = line.find_last_of(',');
 
-        string value = line.substr(0,last_comma_index);
-        string type = line.substr(last_comma_index + 1);
+        std::string value = line.substr(0,last_comma_index);
+        std::string type = line.substr(last_comma_index + 1);
 
         boost::trim(value);
         boost::trim(type);
@@ -105,8 +105,8 @@ bool lexer_tester::test_file(string filepath) {
 
     bool errors = false;
 
-    string type;
-    string value;
+    std::string type;
+    std::string value;
 
     while(token) {
 
@@ -122,13 +122,13 @@ bool lexer_tester::test_file(string filepath) {
             return false;
         }
 
-        string error_message;
+        std::string error_message;
 
         if(token->value != value) {
             errors = true;
 
-            error_message = "Error on line " + to_string(token->line_number) + "," +
-                                   to_string(token->position_number) + ": ";
+            error_message = "Error on line " + std::to_string(token->line_number) + "," +
+                                   std::to_string(token->position_number) + ": ";
             error_message += "Value mismatch; token value " + token->value + " does not match " + value;
 
             print(error_message);
@@ -137,9 +137,9 @@ bool lexer_tester::test_file(string filepath) {
         if(token_type_names[(int) token->type - 1] != type) {
             errors = true;
 
-            error_message = "Error on line " + to_string(token->line_number) + "," +
-                            to_string(token->position_number) + ": ";
-            error_message += "Type mismatch; token type " + string(token_type_names[(int) token->type - 1]) +
+            error_message = "Error on line " + std::to_string(token->line_number) + "," +
+                            std::to_string(token->position_number) + ": ";
+            error_message += "Type mismatch; token type " + std::string(token_type_names[(int) token->type - 1]) +
                     " does not match " + type;
 
             print(error_message);

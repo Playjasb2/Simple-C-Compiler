@@ -5,9 +5,7 @@
 #ifndef SIMPLE_C_COMPILER_ARITHMETICEXPRESSION_H
 #define SIMPLE_C_COMPILER_ARITHMETICEXPRESSION_H
 
-
 #include "BinaryExpression.h"
-#include "ASTPrinter.h"
 
 namespace AST {
 

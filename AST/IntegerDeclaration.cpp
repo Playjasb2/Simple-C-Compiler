@@ -4,9 +4,6 @@
 
 #include "IntegerDeclaration.h"
 
-#include <utility>
-#include "ASTPrinter.h"
-
 using namespace AST;
 
 IntegerDeclaration::IntegerDeclaration(Variable *variable): Declaration(variable){

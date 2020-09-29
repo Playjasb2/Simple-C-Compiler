@@ -11,7 +11,6 @@
 
 #define exists_in_set(needle, haystack) std::find(std::begin(haystack), std::end(haystack), needle) != std::end(haystack)
 
-using namespace std;
 
 namespace tester {
     const char *test_mode[] = {"lexer", "parser", "semantics", "codegen", "optimization"};

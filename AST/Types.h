@@ -7,8 +7,6 @@
 
 #include <string>
 
-using namespace std;
-
 namespace AST {
 
     enum Type {
@@ -20,7 +18,7 @@ namespace AST {
         TYPE_MAX
     };
 
-    const char *Type_Names[Type::TYPE_MAX] = {"Integer", "String", "Boolean", "Void"};
+    const char *Type_Names[Type::TYPE_MAX] = {"Integer", "StringValue", "Boolean", "Void"};
 
 }
 

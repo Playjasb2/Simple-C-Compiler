@@ -3,6 +3,7 @@
 //
 
 #include "ASTPrinter.h"
+#include "Program.h"
 
 using namespace AST;
 
@@ -46,10 +47,6 @@ void ASTPrinter::visit(NotExpression *expression) {
 
 }
 
-void ASTPrinter::visit(UnaryExpression<string> *expression) {
-
-}
-
-void ASTPrinter::visit(UnaryExpression<Expression> *expression) {
+void ASTPrinter::visit(UnaryExpression* expression) {
 
 }

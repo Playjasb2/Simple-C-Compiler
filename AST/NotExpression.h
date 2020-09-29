@@ -5,9 +5,7 @@
 #ifndef SIMPLE_C_COMPILER_NOTEXPRESSION_H
 #define SIMPLE_C_COMPILER_NOTEXPRESSION_H
 
-
 #include "UnaryExpression.h"
-#include "ASTPrinter.h"
 
 namespace AST {
 

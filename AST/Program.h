@@ -14,13 +14,13 @@ namespace AST {
 
     private:
         StatementList *statementList = new StatementList();
-        vector<string> *errors  = new vector<string>();
+        std::vector<std::string> *errors  = new std::vector<std::string>();
 
     public:
         Program();
         ~Program() override;
         explicit Program(StatementList *statementList);
-        explicit Program(StatementList *statementList, vector<string> *errors);
+        explicit Program(StatementList *statementList, std::vector<std::string> *errors);
         void accept(ASTPrinter *printer) override;
     };
 

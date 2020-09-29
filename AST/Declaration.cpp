@@ -3,11 +3,10 @@
 //
 
 #include "Declaration.h"
-#include <utility>
 
 using namespace AST;
 
-Declaration::Declaration(Variable *variable) : VariableStatement(variable) {
+Declaration::Declaration(Variable *variable) : VariableStatement(variable), value(nullptr) {
 
 }
 

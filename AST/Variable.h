@@ -16,11 +16,11 @@ namespace AST {
 
     private:
         Type type;
-        string name;
         Token *token;
 
     public:
-        explicit Variable(string name, Type type, Token *token);
+        explicit Variable(Type type, Token *token);
+        std::string getName();
     };
 }
 

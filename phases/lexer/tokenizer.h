@@ -13,8 +13,6 @@
 #include <tokenStream.h>
 #include <print.h>
 
-using namespace std;
-
 class tokenizer {
 
 private:
@@ -26,16 +24,16 @@ private:
     unsigned int last_position_number;
 
     const char *line_char = nullptr;
-    string current_word;
-    string current_stream_name;
-    ifstream current_stream;
+    std::string current_word;
+    std::string current_stream_name;
+    std::ifstream current_stream;
 
-    map<string, Token_Type> keyword_to_token_type
+    std::map<std::string, Token_Type> keyword_to_token_type
     = {{"if" , Token_Type::if_},
        {"else", Token_Type::else_},
        {"int", Token_Type::int_type_keyword}};
 
-    map<string, Token_Type> symbol_to_type
+    std::map<std::string, Token_Type> symbol_to_type
     = {{"+", Token_Type::plus},
        {"-", Token_Type::minus},
        {"*", Token_Type::multiply},
@@ -60,7 +58,7 @@ private:
 
     bool inComment = false;
 
-    vector<Token> *token_stream;
+    std::vector<Token> *token_stream;
 
     void add_token_to_stream(Token_Type type);
 
@@ -79,7 +77,7 @@ private:
 
 public:
     tokenizer();
-    void process_file(string filename);
+    void process_file(std::string filename);
     tokenStream *get_token_stream();
 
 

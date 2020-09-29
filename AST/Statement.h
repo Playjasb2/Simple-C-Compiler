@@ -9,7 +9,7 @@
 
 namespace AST {
 
-    class Statement: ASTNode {
+    class Statement: public ASTNode {
 
     };
 }

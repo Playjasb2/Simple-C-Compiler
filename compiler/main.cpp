@@ -4,7 +4,7 @@
 #include "main.h"
 #include "lexer.h"
 
-using namespace std;
+
 namespace po = boost::program_options;
 
 int main(int argc, char *argv[]) {
@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
     desc.add_options()
             ("help", "produce help message")
             ("version,v", "compiler version")
-            ("input-file", po::value< vector<string> >(), "input file")
+            ("input-file", po::value< std::vector<std::string> >(), "input file")
             ;
 
     po::positional_options_description p;
@@ -25,10 +25,10 @@ int main(int argc, char *argv[]) {
     po::notify(vm);
 
     if(vm.count("version")) {
-        print("Jas Compiler Version: " + to_string(COMPILER_VERSION));
+        print("Jas Compiler Version: " + std::to_string(COMPILER_VERSION));
     }
     else if(vm.count("input-file")) {
-        string filepath = vm["input-file"].as< vector<string> >().front();
+        std::string filepath = vm["input-file"].as< std::vector<std::string> >().front();
 
         // Lexical Analysis
         tokenStream *token_stream = lexer::parsefile(filepath);

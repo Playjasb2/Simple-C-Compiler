@@ -6,13 +6,10 @@
 #define COMPILER_PROJECT_PRINT_H
 
 #include <iostream>
-#include <string>
-
-using namespace std;
 
 template <typename T>
 void inline print(const T& output) {
-    cout << output << endl;
+    std::cout << output << std::endl;
 }
 
 #endif //COMPILER_PROJECT_PRINT_H

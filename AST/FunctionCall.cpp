@@ -3,9 +3,6 @@
 //
 
 #include "FunctionCall.h"
-#include "ASTPrinter.h"
-
-#include <utility>
 
 using namespace AST;
 
@@ -13,13 +10,13 @@ FunctionCall::FunctionCall(Function *function, bool isStatement): function(funct
 
 }
 
-FunctionCall::FunctionCall(Function *function, vector<Expression *> *arguments, vector<Token *> *argument_tokens,
-                           bool isStatement): function(function), arguments(arguments),
-                           argument_tokens(argument_tokens), isStatement(isStatement) {
+FunctionCall::FunctionCall(Function *function, std::vector<Expression *> *arguments,
+                           std::vector<Token *> *argument_tokens, bool isStatement): function(function),
+                           arguments(arguments), argument_tokens(argument_tokens), isStatement(isStatement) {
 
 }
 
-vector<Expression *> *FunctionCall::getArguments() {
+std::vector<Expression *> *FunctionCall::getArguments() {
     return this->arguments;
 }
 

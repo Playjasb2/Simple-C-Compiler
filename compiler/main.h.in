@@ -5,14 +5,7 @@
 #ifndef JAS_COMPILER_MAIN_H
 #define JAS_COMPILER_MAIN_H
 
-#include <string>
-#include <vector>
-
-#include <print.h>
-
 #define COMPILER_VERSION @COMPILER_VERSION@
-
-using namespace std;
 
 const int DEBUG_OPTIONS_NUM = 5;
 const char *DEBUG_OPTIONS[] = {"lexer", "parser", "semantics", "codegen", "optimizer"};

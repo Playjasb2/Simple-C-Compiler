@@ -4,7 +4,7 @@
 
 #include "UnaryExpression.h"
 
-#include <utility>
+using namespace AST;
 
 UnaryExpression::UnaryExpression(Expression *expression): expression(expression){
 
@@ -21,5 +21,3 @@ void UnaryExpression::accept(ASTPrinter *printer){
 UnaryExpression::~UnaryExpression() {
     delete this->expression;
 }
-
-

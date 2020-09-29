@@ -8,7 +8,7 @@
 #include "lexer.h"
 #include "test_lexer.h"
 
-using namespace std;
+
 using namespace tester;
 namespace po = boost::program_options;
 
@@ -17,8 +17,8 @@ int main(int argc, char *argv[]) {
     po::options_description desc("Allowed options");
     desc.add_options()
             ("help,h", "produce help message")
-            ("mode,m", po::value<string>(), "mode")
-            ("input-file", po::value< vector<string> >(), "input file")
+            ("mode,m", po::value<std::string>(), "mode")
+            ("input-file", po::value< std::vector<std::string> >(), "input file")
             ;
 
     po::positional_options_description p;
@@ -30,8 +30,8 @@ int main(int argc, char *argv[]) {
     po::notify(vm);
 
     if (vm.count("input-file") && vm.count("mode")) {
-        string filepath = vm["input-file"].as< vector<string> >().front();
-        string mode = vm["mode"].as<string>();
+        std::string filepath = vm["input-file"].as< std::vector<std::string> >().front();
+        std::string mode = vm["mode"].as<std::string>();
 
         if(!(exists_in_set(mode, test_mode))) {
             return 1;

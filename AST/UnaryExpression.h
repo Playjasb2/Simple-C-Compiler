@@ -6,11 +6,7 @@
 #define SIMPLE_C_COMPILER_UNARYEXPRESSION_H
 
 #include <string>
-#include <utility>
 #include "Expression.h"
-#include "ASTPrinter.h"
-
-using namespace std;
 
 namespace AST {
 

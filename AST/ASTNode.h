@@ -9,8 +9,6 @@
 #include <string>
 #include "ASTPrinter.h"
 
-using namespace std;
-
 namespace AST {
 
     class ASTNode {

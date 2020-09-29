@@ -4,8 +4,6 @@
 
 #include "VariableStatement.h"
 
-#include <utility>
-
 using namespace AST;
 
 VariableStatement::VariableStatement(Variable *variable): variable(variable){

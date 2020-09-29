@@ -7,8 +7,6 @@
 
 #include <string>
 
-using namespace std;
-
 enum class Token_Type {
     integer = 1,
     string,
@@ -63,7 +61,7 @@ typedef struct Token {
     unsigned int line_number;
     unsigned int position_number;
     Token_Type type;
-    string value;
+    std::string value;
 } Token;
 
 #endif //JAS_COMPILER_TOKEN_H

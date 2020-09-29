@@ -6,7 +6,6 @@
 #define SIMPLE_C_COMPILER_INTEGERDECLARATION_H
 
 #include "Declaration.h"
-#include "ASTPrinter.h"
 
 namespace AST {
 

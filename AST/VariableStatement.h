@@ -9,8 +9,6 @@
 #include "Statement.h"
 #include "Variable.h"
 
-using namespace std;
-
 namespace AST {
 
     class VariableStatement : public Statement {

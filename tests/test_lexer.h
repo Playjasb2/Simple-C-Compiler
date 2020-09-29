@@ -7,12 +7,12 @@
 
 #include <string>
 
-using namespace std;
+
 
 class lexer_tester {
 
 public:
-    static bool test_file(string filepath);
+    static bool test_file(std::string filepath);
 };
 
 #endif //SIMPLE_C_COMPILER_TEST_LEXER_H

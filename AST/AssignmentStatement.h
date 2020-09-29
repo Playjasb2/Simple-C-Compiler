@@ -7,14 +7,13 @@
 
 #include "VariableStatement.h"
 #include "Expression.h"
-#include "ASTPrinter.h"
 
 namespace AST {
     enum Assignment_Operator {
         equal = 1,
         plus_equal,
         minus_equal,
-        times_equal,
+        multiply_equal,
         divide_equal
     };
 

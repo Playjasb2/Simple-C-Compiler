@@ -4,7 +4,7 @@
 
 #include "tokenStream.h"
 
-tokenStream::tokenStream(vector<Token> *stream) {
+tokenStream::tokenStream(std::vector<Token> *stream) {
     this->stream = stream;
     this->length = stream->size();
 }
@@ -41,14 +41,14 @@ unsigned int tokenStream::get_length() const {
     return this->length;
 }
 
-void tokenStream::goBack(signed int amount) {
-    if(amount > 0 && this->current_index - amount >= 0) {
-        this->current_index -= amount;
+void tokenStream::jump(signed int amount) {
+    if(this->current_index + amount >= 0 && this->current_index + amount < this->length) {
+        this->current_index += amount;
     }
 }
 
-Token *tokenStream::peakNthNextToken(signed int n) {
-    if(n > 0 && this->current_index + n < this->length) {
+Token *tokenStream::peakNthToken(signed int n) {
+    if(this->current_index + n > 0 && this->current_index + n < this->length) {
         return &this->stream->at(this->current_index + n);
     }
 }

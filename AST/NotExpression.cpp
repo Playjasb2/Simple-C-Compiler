@@ -4,9 +4,6 @@
 
 #include "NotExpression.h"
 
-#include <utility>
-#include "ASTPrinter.h"
-
 using namespace AST;
 
 NotExpression::NotExpression(Expression *expression): UnaryExpression(expression){

@@ -3,7 +3,6 @@
 //
 
 #include "StatementList.h"
-#include "ASTPrinter.h"
 
 using namespace AST;
 
@@ -26,7 +25,7 @@ void StatementList::accept(ASTPrinter *printer) {
     printer->visit(this);
 }
 
-vector<Statement *> *StatementList::getStatements() {
+std::vector<Statement *> *StatementList::getStatements() {
     return this->statements;
 }
 

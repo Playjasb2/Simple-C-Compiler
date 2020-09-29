@@ -9,8 +9,18 @@
 #include <token.h>
 #include <tokenStream.h>
 #include <Program.h>
+#include <StatementList.h>
+#include <Statement.h>
+#include <AssignmentStatement.h>
+#include <IntegerDeclaration.h>
+#include <IncrementDecrementExpression.h>
+#include <IfStatement.h>
+#include <FunctionCall.h>
+#include <ArithmeticExpression.h>
+#include <ConditionalExpression.h>
+#include <NotExpression.h>
 
-using namespace std;
+
 using namespace AST;
 
 class parser {
@@ -18,20 +28,24 @@ class parser {
 private:
     static Program *program;
     static tokenStream *stream;
-    static vector<string> *errors;
+    static std::vector<std::string> *errors;
 
-    static void addErrors(const string& error);
+    static void addError(const std::string& custom);
+    static void addError(const std::string& expected, Token *received);
 
-    static std::pair<StatementList, bool> parseStatementList();
-    static std::pair<Statement, bool> parseStatement();
-    static std::pair<Statement, bool> parseAssignmentStatement();
-    static std::pair<Statement, bool> parseIntegerDeclaration();
-    static std::pair<Statement, bool> parseIncrementDecrementExpression(bool isStatement);
-    static std::pair<Statement, bool> parseIfStatement();
-    static std::pair<Statement, bool> parseFunctionCall(bool isStatement);
+    static StatementList *parseStatementList(bool isGlobalScope);
+    static Statement *parseStatement();
+    static AssignmentStatement *parseAssignmentStatement();
+    static IntegerDeclaration *parseIntegerDeclaration();
+    static Expression *parseExpression();
+    static IncrementDecrementExpression *parseIncrementDecrementExpression(bool isStatement);
+    static IfStatement *parseIfStatement();
+    static FunctionCall *parseFunctionCall(bool isStatement);
+
+    static ArithmeticExpression *parseArithmeticExpression();
 
 public:
-    static Program *parseStream(tokenStream *token_stream);
+    static Program *parseProgram(tokenStream *token_stream);
 
 
 };

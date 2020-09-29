@@ -12,19 +12,20 @@ class tokenStream {
 
 private:
 
-    vector<Token> *stream;
+    std::vector<Token> *stream;
     int current_index = -1;
     unsigned int length = 0;
 
 public:
 
-    explicit tokenStream(vector<Token> *stream);
+    explicit tokenStream(std::vector<Token> *stream);
     Token *getNext();
     Token *getPrevious();
     Token *peakNext();
     Token *peakPrevious();
-    Token *peakNthNextToken(signed int n);
-    void goBack(signed int amount);
+    Token *peakNthToken(signed int n);
+    void jump(signed int amount);
+
 
     unsigned int get_length() const;
 

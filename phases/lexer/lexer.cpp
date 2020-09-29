@@ -1,21 +1,18 @@
 //
 // Created by Jasmeet Brar on 2019-12-31.
 //
-#include <string>
-#include <utility>
-#include <vector>
 
+#include <utility>
 #include "lexer.h"
 
 
-using namespace std;
 
-tokenStream *lexer::parsefile(string filename){
-    ifstream fileStream;
+tokenStream *lexer::parsefile(std::string filename){
+    std::ifstream fileStream;
 
-    string line;
+    std::string line;
 
-    string current_value;
+    std::string current_value;
 
     tokenizer tokenizer;
 

@@ -8,16 +8,13 @@
 #include <vector>
 #include "Statement.h"
 #include "ASTNode.h"
-#include "ASTPrinter.h"
-
-using namespace std;
 
 namespace AST {
 
     class StatementList : public ASTNode {
 
     private:
-        vector<Statement *> *statements = new vector<Statement *>();
+        std::vector<Statement *> *statements = new std::vector<Statement *>();
 
     public:
         explicit StatementList();
@@ -25,7 +22,7 @@ namespace AST {
         ~StatementList() override;
         void addStatement(Statement *statement);
         unsigned int getNumOfStatements();
-        vector<Statement *> *getStatements();
+        std::vector<Statement *> *getStatements();
         void accept(ASTPrinter *printer) override;
     };
 
