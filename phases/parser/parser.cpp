@@ -176,3 +176,63 @@ IntegerDeclaration *parser::parseIntegerDeclaration() {
 
     return declaration;
 }
+
+IncrementDecrementExpression *parser::parseIncrementDecrementExpression(bool isStatement) {
+    Token *current_token = parser::stream->getNext();
+    IncrementDecrementOperator op;
+    Variable *variable;
+    if(current_token->type == Token_Type::plus_plus || current_token->type == Token_Type::minus_minus) {
+        std::map<Token_Type, IncrementDecrementOperator> token_type_to_op = {
+                {Token_Type::plus_plus, IncrementDecrementOperator::plus_plus_prefix},
+                {Token_Type::minus_minus, IncrementDecrementOperator::minus_minus_prefix}
+        };
+
+        op = token_type_to_op.at(current_token->type);
+
+        current_token = parser::stream->getNext();
+
+        if(current_token->type == Token_Type::identifier) {
+            variable = new Variable(Type::Integer, current_token);
+        }
+        else {
+            parser::addError("some variable", current_token);
+            return nullptr;
+        }
+
+        Token *next_token = parser::stream->peakNext();
+
+        if(next_token->type == Token_Type::plus_plus || next_token->type == Token_Type::minus_minus) {
+            std::string error = "Syntax Error: Line " + std::to_string(next_token->line_number) + ":"
+                    + std::to_string(next_token->position_number) + ": Cannot have postfix '++' or '--' operator when "
+                                                                    "there is already a prefix";
+            parser::addError(error);
+            parser::stream->jump(1);
+            return nullptr;
+        }
+
+    }
+    else if(current_token->type == Token_Type::identifier) {
+        variable = new Variable(Type::Integer, current_token);
+
+        current_token = parser::stream->getNext();
+
+        if(current_token->type == Token_Type::plus_plus) {
+            op = IncrementDecrementOperator::plus_plus_postfix;
+        }
+        else if(current_token->type == Token_Type::minus_minus) {
+            op = IncrementDecrementOperator::plus_plus_postfix;
+        }
+        else {
+            parser::addError("'++' or '--'", current_token);
+            return nullptr;
+        }
+    }
+    else {
+        parser::addError("'++','--', or some variable", current_token);
+        return nullptr;
+    }
+
+    auto * expression = new IncrementDecrementExpression(variable, op, isStatement);
+
+    return expression;
+}
