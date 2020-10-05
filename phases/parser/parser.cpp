@@ -50,7 +50,6 @@ StatementList *parser::parseStatementList(bool isGlobalScope) {
     Token_Type next_token_type = parser::stream->peakNext()->type;
 
     if((isGlobalScope && next_token_type == Token_Type::eof) || (next_token_type == Token_Type::right_curly_bracket)) {
-        //parser::stream->jump(1);
         return new StatementList(statement);
     }
     else {
