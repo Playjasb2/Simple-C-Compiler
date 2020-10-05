@@ -6,9 +6,7 @@
 
 using namespace AST;
 
-IfStatement::IfStatement(ConditionalExpression *conditional_expression, StatementList *if_block,
-                         StatementList *else_block): conditional_expression(conditional_expression),
-                         if_block(if_block), else_block(else_block) {
+IfStatement::IfStatement(std::vector<IfBlock *> *ifBlocks): ifBlocks(ifBlocks){
 
 }
 
@@ -17,7 +15,11 @@ void IfStatement::accept(ASTPrinter *printer) {
 }
 
 IfStatement::~IfStatement() {
-    delete this->conditional_expression;
-    delete this->if_block;
-    delete this->else_block;
+    delete this->ifBlocks;
 }
+
+std::vector<IfBlock *> *IfStatement::getIfBlocks() {
+    return this->ifBlocks;
+}
+
+

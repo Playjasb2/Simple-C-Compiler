@@ -41,7 +41,7 @@ add_library(
         StringValue.h
         Function.cpp
         Function.h
-        UnaryExpression.cpp)
+        UnaryExpression.cpp IfBlock.cpp IfBlock.h)
 
 target_include_directories(AST PUBLIC ".")
 

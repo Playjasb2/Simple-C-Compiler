@@ -30,6 +30,7 @@ namespace AST {
     class StatementList;
     class AssignmentStatement;
     class IfStatement;
+    class IfBlock;
     class IntegerDeclaration;
     class IncrementDecrementExpression;
     class FunctionCall;
@@ -42,6 +43,7 @@ namespace AST {
         void visit(StatementList *statementList);
         void visit(AssignmentStatement *statement);
         void visit(IfStatement *statement);
+        void visit(IfBlock *ifblock);
         void visit(IntegerDeclaration *declaration);
         void visit(IncrementDecrementExpression *expression);
         void visit(ArithmeticExpression *expression);

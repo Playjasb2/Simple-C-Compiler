@@ -4,6 +4,7 @@
 
 #include <IntegerDeclaration.h>
 #include <map>
+#include <algorithm>
 #include "parser.h"
 
 void parser::addError(const std::string& custom) {
@@ -49,7 +50,7 @@ StatementList *parser::parseStatementList(bool isGlobalScope) {
     Token_Type next_token_type = parser::stream->peakNext()->type;
 
     if((isGlobalScope && next_token_type == Token_Type::eof) || (next_token_type == Token_Type::right_curly_bracket)) {
-        parser::stream->jump(1);
+        //parser::stream->jump(1);
         return new StatementList(statement);
     }
     else {
@@ -134,7 +135,7 @@ AssignmentStatement *parser::parseAssignmentStatement() {
 
     Assignment_Operator op = possible_assignment_operators.at(assignment_operator->type);
 
-    Expression *expression = parseExpression();
+    Expression *expression = parseArithmeticExpression();
 
     auto *statement = new AssignmentStatement(variable, op, expression, assignment_operator);
 
@@ -158,7 +159,7 @@ IntegerDeclaration *parser::parseIntegerDeclaration() {
         processed_tokens.push_back(current_token);
     }
 
-    Expression *expression = parseExpression();
+    Expression *expression = parseArithmeticExpression();
 
     processed_tokens.pop_back();
     processed_tokens.pop_back();
@@ -235,4 +236,105 @@ IncrementDecrementExpression *parser::parseIncrementDecrementExpression(bool isS
     auto * expression = new IncrementDecrementExpression(variable, op, isStatement);
 
     return expression;
+}
+
+IfStatement * parser::parseIfStatement() {
+    std::vector<IfBlock *> *ifBlocks;
+    Token_Type first_syntax[] = {Token_Type::if_, Token_Type::left_round_bracket};
+    std::string first_syntax_strings[] = {"if", "("};
+
+    Token *current_token;
+
+    for(int i = 0; i < first_syntax_strings->length(); i++) {
+        current_token = parser::stream->getNext();
+        if(current_token->type != first_syntax[i]) {
+            addError(first_syntax_strings[i], current_token);
+            return nullptr;
+        }
+    }
+
+    ConditionalExpression *conditionalExpression = parseConditionalExpression();
+
+    Token_Type second_syntax[] = {Token_Type::right_round_bracket, Token_Type::left_curly_bracket};
+    std::string second_syntax_strings[] {")", "{"};
+
+    for(int i = 0; i < second_syntax_strings->length(); i++) {
+        current_token = parser::stream->getNext();
+        if(current_token->type != second_syntax[i]) {
+            addError(second_syntax_strings[i], current_token);
+            return nullptr;
+        }
+    }
+
+    StatementList *statementList = parseStatementList(false);
+
+    current_token = parser::stream->getNext();
+
+    if(current_token->type != Token_Type::right_curly_bracket) {
+        addError("}", current_token);
+        return nullptr;
+    }
+
+    ifBlocks = new std::vector<IfBlock *>();
+    auto *ifBlock = new IfBlock(conditionalExpression, statementList);
+    ifBlocks->push_back(ifBlock);
+
+    current_token = parser::stream->getNext();
+
+    while(current_token->type == Token_Type::else_if_) {
+        current_token = parser::stream->getNext();
+        if(current_token->type != Token_Type::left_round_bracket) {
+            addError("(", current_token);
+            return nullptr;
+        }
+
+        conditionalExpression = parseConditionalExpression();
+
+        for(int i = 0; i < second_syntax_strings->length(); i++) {
+            current_token = parser::stream->getNext();
+            if(current_token->type != second_syntax[i]) {
+                addError(second_syntax_strings[i], current_token);
+                return nullptr;
+            }
+        }
+
+        statementList = parseStatementList(false);
+
+        current_token = parser::stream->getNext();
+
+        if(current_token->type != Token_Type::right_curly_bracket) {
+            addError("}", current_token);
+            return nullptr;
+        }
+
+        ifBlock = new IfBlock(conditionalExpression, statementList);
+        ifBlocks->push_back(ifBlock);
+
+        current_token = parser::stream->getNext();
+    }
+
+    if(current_token->type == Token_Type::else_) {
+        current_token = parser::stream->getNext();
+        if(current_token->type != Token_Type::left_curly_bracket) {
+            addError("{", current_token);
+            return nullptr;
+        }
+
+        statementList = parseStatementList(false);
+
+        current_token = parser::stream->getNext();
+        if(current_token->type != Token_Type::right_curly_bracket) {
+            addError("}", current_token);
+            return nullptr;
+        }
+
+        ifBlock = new IfBlock(statementList);
+        ifBlocks->push_back(ifBlock);
+    }
+
+    std::reverse(ifBlocks->begin(), ifBlocks->end());
+
+    auto *ifStatement = new IfStatement(ifBlocks);
+
+    return ifStatement;
 }

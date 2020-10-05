@@ -15,6 +15,7 @@
 #include <IntegerDeclaration.h>
 #include <IncrementDecrementExpression.h>
 #include <IfStatement.h>
+#include <IfBlock.h>
 #include <FunctionCall.h>
 #include <ArithmeticExpression.h>
 #include <ConditionalExpression.h>
@@ -37,12 +38,12 @@ private:
     static Statement *parseStatement();
     static AssignmentStatement *parseAssignmentStatement();
     static IntegerDeclaration *parseIntegerDeclaration();
-    static Expression *parseExpression();
     static IncrementDecrementExpression *parseIncrementDecrementExpression(bool isStatement);
     static IfStatement *parseIfStatement();
     static FunctionCall *parseFunctionCall(bool isStatement);
 
     static ArithmeticExpression *parseArithmeticExpression();
+    static ConditionalExpression *parseConditionalExpression();
 
 public:
     static Program *parseProgram(tokenStream *token_stream);

@@ -23,6 +23,10 @@ void ASTPrinter::visit(IfStatement *statement) {
 
 }
 
+void ASTPrinter::visit(IfBlock *ifblock) {
+
+}
+
 void ASTPrinter::visit(IntegerDeclaration *declaration) {
 
 }

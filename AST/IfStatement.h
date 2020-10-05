@@ -5,10 +5,8 @@
 #ifndef SIMPLE_C_COMPILER_IFSTATEMENT_H
 #define SIMPLE_C_COMPILER_IFSTATEMENT_H
 
-
-#include "VariableStatement.h"
-#include "StatementList.h"
-#include "ConditionalExpression.h"
+#include "Statement.h"
+#include "IfBlock.h"
 
 
 namespace AST {
@@ -16,13 +14,12 @@ namespace AST {
     class IfStatement : public Statement {
 
     private:
-        ConditionalExpression *conditional_expression;
-        StatementList *if_block;
-        StatementList *else_block;
+        std::vector<IfBlock *> *ifBlocks;
 
     public:
-        IfStatement(ConditionalExpression *conditional_expression, StatementList *if_block, StatementList *else_block);
+        explicit IfStatement(std::vector<IfBlock *> *ifBlocks);
         ~IfStatement() override;
+        std::vector<IfBlock *> *getIfBlocks();
         void accept(ASTPrinter *printer) override;
     };
 
