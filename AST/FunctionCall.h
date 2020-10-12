@@ -19,13 +19,11 @@ namespace AST {
         Function *function;
         bool isStatement;
         std::vector<Expression *> *arguments = new std::vector<Expression *>();
-        std::vector<Token *> *argument_tokens = new std::vector<Token *>();
 
     public:
         explicit FunctionCall(Function *function, bool isStatement);
         ~FunctionCall() override;
-        FunctionCall(Function *function, std::vector<Expression *> *arguments, std::vector<Token *> *argument_tokens,
-                     bool isStatement);
+        FunctionCall(Function *function, std::vector<Expression *> *arguments, bool isStatement);
         std::vector<Expression *> *getArguments();
         void accept(ASTPrinter *printer) override;
     };

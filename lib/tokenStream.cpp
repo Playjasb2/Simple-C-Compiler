@@ -51,4 +51,5 @@ Token *tokenStream::peakNthToken(signed int n) {
     if(this->current_index + n > 0 && this->current_index + n < this->length) {
         return &this->stream->at(this->current_index + n);
     }
+    return nullptr;
 }

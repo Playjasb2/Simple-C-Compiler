@@ -11,6 +11,7 @@
 #include <Program.h>
 #include <StatementList.h>
 #include <Statement.h>
+#include <Expression.h>
 #include <AssignmentStatement.h>
 #include <IntegerDeclaration.h>
 #include <IncrementDecrementExpression.h>
@@ -42,6 +43,7 @@ private:
     static IfStatement *parseIfStatement();
     static FunctionCall *parseFunctionCall(bool isStatement);
 
+    static Expression *parseExpression();
     static ArithmeticExpression *parseArithmeticExpression();
     static ConditionalExpression *parseConditionalExpression();
 

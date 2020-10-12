@@ -337,3 +337,39 @@ IfStatement * parser::parseIfStatement() {
 
     return ifStatement;
 }
+
+FunctionCall *parser::parseFunctionCall(bool isStatement) {
+    Token *current_token = parser::stream->getNext();
+
+    if(current_token->type != Token_Type::identifier) {
+        parser::addError("identifier", current_token);
+        return nullptr;
+    }
+
+    auto *function = new Function(Type::Unknown, current_token);
+
+    if(parser::stream->peakNext()->type != Token_Type::left_round_bracket) {
+        parser::addError("(", parser::stream->peakNext());
+        return nullptr;
+    }
+
+    parser::stream->jump(1);
+
+    auto arguments = new std::vector<Expression *>();
+
+    while(parser::stream->peakNext()->type != Token_Type::right_round_bracket) {
+        Expression *expression = parseExpression();
+        arguments->push_back(expression);
+
+        if(parser::stream->peakNext()->type == Token_Type::comma) {
+            parser::stream->jump(1);
+        }
+    }
+
+    parser::stream->jump(1);
+    std::reverse(arguments->begin(), arguments->end());
+
+    auto functionCall = new FunctionCall(function, arguments, isStatement);
+
+    return functionCall;
+}

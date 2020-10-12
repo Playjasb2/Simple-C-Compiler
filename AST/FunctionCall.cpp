@@ -11,8 +11,7 @@ FunctionCall::FunctionCall(Function *function, bool isStatement): function(funct
 }
 
 FunctionCall::FunctionCall(Function *function, std::vector<Expression *> *arguments,
-                           std::vector<Token *> *argument_tokens, bool isStatement): function(function),
-                           arguments(arguments), argument_tokens(argument_tokens), isStatement(isStatement) {
+                           bool isStatement): function(function), arguments(arguments), isStatement(isStatement) {
 
 }
 
@@ -27,5 +26,4 @@ void FunctionCall::accept(ASTPrinter *printer) {
 FunctionCall::~FunctionCall() {
     delete this->function;
     delete this->arguments;
-    delete this->argument_tokens;
 }

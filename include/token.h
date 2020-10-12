@@ -12,6 +12,7 @@ enum class Token_Type {
     string,
     identifier,
     semicolon,
+    comma,
     if_,
     else_if_,
     else_,
@@ -52,7 +53,7 @@ enum class Token_Type {
     right_curly_bracket,
     int_type_keyword,
     invalid,
-    eof
+    eof,
 };
 
 const unsigned int number_of_token_types = (const unsigned int) Token_Type::eof;
