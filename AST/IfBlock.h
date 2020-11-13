@@ -24,7 +24,7 @@ namespace AST {
         ~IfBlock() override;
         ConditionalExpression *getConditionalExpression();
         StatementList *getStatementList();
-        void accept(ASTPrinter *printer) override;
+        void accept(Visitor *visitor) override;
     };
 
 }

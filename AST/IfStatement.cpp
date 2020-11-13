@@ -10,8 +10,8 @@ IfStatement::IfStatement(std::vector<IfBlock *> *ifBlocks): ifBlocks(ifBlocks){
 
 }
 
-void IfStatement::accept(ASTPrinter *printer) {
-    printer->visit(this);
+void IfStatement::accept(Visitor *visitor) {
+    visitor->visit(this);
 }
 
 IfStatement::~IfStatement() {

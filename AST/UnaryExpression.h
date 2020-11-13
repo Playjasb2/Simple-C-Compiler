@@ -22,7 +22,7 @@ namespace AST {
     public:
         Expression *getExpression();
 
-        void accept(ASTPrinter *printer) override;
+        void accept(Visitor *visitor) override;
     };
 
 }

@@ -14,8 +14,8 @@ Expression *UnaryExpression::getExpression() {
     return this->expression;
 }
 
-void UnaryExpression::accept(ASTPrinter *printer){
-    printer->visit(this);
+void UnaryExpression::accept(Visitor *visitor){
+    visitor->visit(this);
 }
 
 UnaryExpression::~UnaryExpression() {

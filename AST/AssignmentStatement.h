@@ -29,7 +29,7 @@ namespace AST {
         ~AssignmentStatement() override;
         Expression *getExpression();
         Assignment_Operator getAssignmentOperator();
-        void accept(ASTPrinter *printer) override;
+        void accept(Visitor *visitor) override;
     };
 }
 

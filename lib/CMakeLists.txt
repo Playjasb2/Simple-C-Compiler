@@ -1,7 +1,7 @@
 add_library(
         lib
         tokenStream.h
-        tokenStream.cpp)
+        tokenStream.cpp Visitor.h)
 
 target_include_directories(lib PUBLIC ".")
 

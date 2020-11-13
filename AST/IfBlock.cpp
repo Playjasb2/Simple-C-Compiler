@@ -28,6 +28,6 @@ IfBlock::~IfBlock() {
     delete this->statementList;
 }
 
-void IfBlock::accept(ASTPrinter *printer) {
-    printer->visit(this);
+void IfBlock::accept(Visitor *visitor) {
+    visitor->visit(this);
 }

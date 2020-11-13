@@ -37,17 +37,17 @@ Token *tokenStream::peakPrevious() {
     return &this->stream->at(this->current_index - 1);
 }
 
-unsigned int tokenStream::get_length() const {
+int tokenStream::get_length() const {
     return this->length;
 }
 
-void tokenStream::jump(signed int amount) {
+void tokenStream::jump(int amount) {
     if(this->current_index + amount >= 0 && this->current_index + amount < this->length) {
         this->current_index += amount;
     }
 }
 
-Token *tokenStream::peakNthToken(signed int n) {
+Token *tokenStream::peakNthToken(int n) {
     if(this->current_index + n > 0 && this->current_index + n < this->length) {
         return &this->stream->at(this->current_index + n);
     }

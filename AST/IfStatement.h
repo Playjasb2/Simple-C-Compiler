@@ -20,7 +20,7 @@ namespace AST {
         explicit IfStatement(std::vector<IfBlock *> *ifBlocks);
         ~IfStatement() override;
         std::vector<IfBlock *> *getIfBlocks();
-        void accept(ASTPrinter *printer) override;
+        void accept(Visitor *visitor) override;
     };
 
 }

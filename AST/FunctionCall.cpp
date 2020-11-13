@@ -19,8 +19,8 @@ std::vector<Expression *> *FunctionCall::getArguments() {
     return this->arguments;
 }
 
-void FunctionCall::accept(ASTPrinter *printer) {
-    printer->visit(this);
+void FunctionCall::accept(Visitor *visitor) {
+    visitor->visit(this);
 }
 
 FunctionCall::~FunctionCall() {

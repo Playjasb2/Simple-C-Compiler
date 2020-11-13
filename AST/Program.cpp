@@ -17,8 +17,8 @@ statementList(statementList), errors(errors){
 
 }
 
-void Program::accept(ASTPrinter *printer) {
-    printer->visit(this);
+void Program::accept(Visitor *visitor) {
+    visitor->visit(this);
 }
 
 Program::~Program() {

@@ -14,7 +14,7 @@ IncrementDecrementExpression::IncrementDecrementExpression(Variable *variable, I
 }
 
 
-void IncrementDecrementExpression::accept(ASTPrinter *printer) {
-    printer->visit(this);
+void IncrementDecrementExpression::accept(Visitor *visitor) {
+    visitor->visit(this);
 }
 

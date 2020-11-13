@@ -12,6 +12,6 @@ op(op), BinaryExpression(operator_token, LHS, RHS) {
 }
 
 
-void ArithmeticExpression::accept(ASTPrinter *printer) {
-    printer->visit(this);
+void ArithmeticExpression::accept(Visitor *visitor) {
+    visitor->visit(this);
 }

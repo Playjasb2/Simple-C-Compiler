@@ -14,7 +14,7 @@ namespace AST {
     public:
         explicit IntegerDeclaration(Variable *variable);
         IntegerDeclaration(Variable *variable, Expression *value);
-        void accept(ASTPrinter *printer) override;
+        void accept(Visitor *visitor) override;
     };
 
 }

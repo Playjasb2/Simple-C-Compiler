@@ -23,7 +23,7 @@ namespace AST {
         void addStatement(Statement *statement);
         unsigned int getNumOfStatements();
         std::vector<Statement *> *getStatements();
-        void accept(ASTPrinter *printer) override;
+        void accept(Visitor *visitor) override;
     };
 
 }

@@ -20,8 +20,8 @@ Assignment_Operator AssignmentStatement::getAssignmentOperator() {
     return this->op;
 }
 
-void AssignmentStatement::accept(ASTPrinter *printer) {
-    printer->visit(this);
+void AssignmentStatement::accept(Visitor *visitor) {
+    visitor->visit(this);
 }
 
 AssignmentStatement::~AssignmentStatement() {

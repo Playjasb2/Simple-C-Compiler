@@ -26,7 +26,7 @@ namespace AST {
 
     public:
         IncrementDecrementExpression(Variable *variable, IncrementDecrementOperator op, bool isStatement);
-        void accept(ASTPrinter *printer) override;
+        void accept(Visitor *visitor) override;
     };
 
 }

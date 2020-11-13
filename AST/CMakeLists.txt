@@ -29,8 +29,8 @@ add_library(
         FunctionCall.cpp
         FunctionCall.h
         ASTNode.h
-        ASTPrinter.cpp
-        ASTPrinter.h
+        ../phases/parser/ASTPrinter.cpp
+        ../phases/parser/ASTPrinter.h
         Program.h
         Program.cpp
         Variable.cpp
@@ -41,7 +41,7 @@ add_library(
         StringValue.h
         Function.cpp
         Function.h
-        UnaryExpression.cpp IfBlock.cpp IfBlock.h)
+        UnaryExpression.cpp IfBlock.cpp IfBlock.h ComputableExpression.cpp ComputableExpression.h)
 
 target_include_directories(AST PUBLIC ".")
 

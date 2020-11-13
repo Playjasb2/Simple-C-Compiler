@@ -7,14 +7,14 @@
 
 #include <token.h>
 #include <string>
-#include "ASTPrinter.h"
+#include "../lib/Visitor.h"
 
 namespace AST {
 
     class ASTNode {
 
     public:
-        virtual void accept(ASTPrinter *printer) {
+        virtual void accept(Visitor *visitor) {
 
         }
         virtual ~ASTNode()= default;

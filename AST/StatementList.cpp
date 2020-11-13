@@ -21,8 +21,8 @@ unsigned int StatementList::getNumOfStatements() {
     return this->statements->size();
 }
 
-void StatementList::accept(ASTPrinter *printer) {
-    printer->visit(this);
+void StatementList::accept(Visitor *visitor) {
+    visitor->visit(this);
 }
 
 std::vector<Statement *> *StatementList::getStatements() {

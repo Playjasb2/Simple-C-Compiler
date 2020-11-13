@@ -21,6 +21,7 @@
 #include <ArithmeticExpression.h>
 #include <ConditionalExpression.h>
 #include <NotExpression.h>
+#include <ComputableExpression.h>
 
 
 using namespace AST;
@@ -44,8 +45,7 @@ private:
     static FunctionCall *parseFunctionCall(bool isStatement);
 
     static Expression *parseExpression();
-    static ArithmeticExpression *parseArithmeticExpression();
-    static ConditionalExpression *parseConditionalExpression();
+
 
 public:
     static Program *parseProgram(tokenStream *token_stream);

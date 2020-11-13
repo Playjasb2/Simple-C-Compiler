@@ -21,7 +21,7 @@ namespace AST {
         ~Program() override;
         explicit Program(StatementList *statementList);
         explicit Program(StatementList *statementList, std::vector<std::string> *errors);
-        void accept(ASTPrinter *printer) override;
+        void accept(Visitor *visitor) override;
     };
 
 }

@@ -17,7 +17,8 @@ namespace AST {
         greater_than,
         greater_than_or_equal_to,
         and_,
-        or_
+        or_,
+        not_
     };
 
     class ConditionalExpression : public BinaryExpression {
@@ -27,7 +28,7 @@ namespace AST {
 
     public:
         ConditionalExpression(Conditional_Operators op, Expression *LHS, Expression *RHS, Token *operator_token);
-        void accept(ASTPrinter *printer) override;
+        void accept(Visitor *visitor) override;
     };
 
 }

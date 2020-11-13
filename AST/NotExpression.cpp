@@ -10,6 +10,6 @@ NotExpression::NotExpression(Expression *expression): UnaryExpression(expression
 
 }
 
-void NotExpression::accept(ASTPrinter *printer) {
-    printer->visit(this);
+void NotExpression::accept(Visitor *visitor) {
+    visitor->visit(this);
 }

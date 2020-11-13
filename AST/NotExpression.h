@@ -13,7 +13,7 @@ namespace AST {
 
     public:
         explicit NotExpression(Expression *expression);
-        void accept(ASTPrinter *printer) override;
+        void accept(Visitor *visitor) override;
     };
 
 }

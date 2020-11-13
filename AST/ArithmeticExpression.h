@@ -14,11 +14,10 @@ namespace AST {
         subtract,
         multiply,
         divide,
-        modulo,
-        OPERATION_MAX
+        modulo
     };
 
-    const char *operator_symbols[OPERATION_MAX] = {"+", "-", "*", "/", "%"};
+    const char *operator_symbols[] = {"+", "-", "*", "/", "%"};
 
     class ArithmeticExpression : public BinaryExpression {
     private:
@@ -26,7 +25,7 @@ namespace AST {
 
     public:
         ArithmeticExpression(Operator op, Expression *LHS, Expression *RHS, Token *operator_token);
-        void accept(ASTPrinter *printer) override;
+        void accept(Visitor *visitor) override;
     };
 
 }

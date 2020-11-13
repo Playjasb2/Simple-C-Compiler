@@ -5,6 +5,9 @@
 #include <IntegerDeclaration.h>
 #include <map>
 #include <algorithm>
+#include <StringValue.h>
+#include <Integer.h>
+#include <tuple>
 #include "parser.h"
 
 void parser::addError(const std::string& custom) {
@@ -372,4 +375,203 @@ FunctionCall *parser::parseFunctionCall(bool isStatement) {
     auto functionCall = new FunctionCall(function, arguments, isStatement);
 
     return functionCall;
+}
+
+
+Expression *parser::parseExpression() {
+    int index = 1;
+
+    auto is_operator_token = [&](Token *current_token) {
+        return ComputableExpression::getOperatorPrecedence(current_token->type) != -1;
+    };
+
+
+    auto is_expression_token = [&](Token *current_token) {
+        return is_operator_token(current_token) || current_token->type == Token_Type::left_round_bracket ||
+               current_token->type == Token_Type::right_round_bracket;
+    };
+
+    auto is_term = [&](Token *current_token) {
+        Token_Type type = current_token->type;
+        return type == Token_Type::integer || type == Token_Type::string || type == Token_Type::identifier;
+    };
+
+    std::function<ComputableExpression *(Expression *lhs, int min_precedence, bool in_scope)> _parseExpression;
+
+    auto parsePrimary = [&]() -> std::tuple<Expression *, StatementList *, StatementList *> {
+        Token *current_token = parser::stream->getNext();
+
+        bool needFurtherParsing = false;
+
+        if (current_token->type == Token_Type::left_round_bracket) {
+            if (parser::stream->peakNext()->type == Token_Type::right_round_bracket) {
+                addError("Identifier or integer", parser::stream->peakNext());
+                parser::stream->jump(1);
+                return std::make_tuple(nullptr, nullptr, nullptr);
+            } else if (parser::stream->peakNthToken(2)->type == Token_Type::right_round_bracket) {
+                current_token = parser::stream->getNext();
+            } else {
+                current_token = parser::stream->getNext();
+                needFurtherParsing = true;
+            }
+        }
+
+        Expression *primary_expression;
+        StatementList *before = nullptr;
+        StatementList *after = nullptr;
+
+        Token *next_token = parser::stream->peakNext();
+
+        if (current_token->type == Token_Type::identifier) {
+            primary_expression = new Variable(Type::Unknown, current_token);
+        } else if (current_token->type == Token_Type::integer) {
+            primary_expression = new class Integer(current_token);
+        } else if ((current_token->type == Token_Type::plus_plus || current_token->type == Token_Type::minus_minus)
+                   && next_token->type == Token_Type::identifier) {
+
+            if (parser::stream->peakNthToken(2)->type == Token_Type::plus_plus
+                || parser::stream->peakNthToken(2)->type == Token_Type::minus_minus) {
+                Token *errorToken = parser::stream->peakNthToken(2);
+                std::string error_message = "Syntax Error: ";
+                error_message += "Line: " + std::to_string(errorToken->line_number) + ":" +
+                                 std::to_string(errorToken->position_number) + ": " +
+                                 "Cannot have ++/-- being both prefix and postfix for the "
+                                 "same identifier.";
+                addError(error_message);
+                return std::make_tuple(nullptr, nullptr, nullptr);
+            }
+
+            primary_expression = new Variable(Type::Unknown, next_token);
+
+            IncrementDecrementOperator op;
+
+            if (current_token->type == Token_Type::plus_plus) {
+                op = IncrementDecrementOperator::plus_plus_prefix;
+            } else {
+                op = IncrementDecrementOperator::minus_minus_prefix;
+            }
+
+            before = new StatementList(
+                    new IncrementDecrementExpression((Variable *) primary_expression, op, false));
+
+            current_token = next_token;
+            parser::stream->jump(1);
+        } else if ((next_token->type == Token_Type::plus_plus || next_token->type == Token_Type::minus_minus)
+                   && current_token->type == Token_Type::identifier) {
+
+            IncrementDecrementOperator op;
+
+            if (next_token->type == Token_Type::plus_plus) {
+                op = IncrementDecrementOperator::plus_plus_prefix;
+            } else {
+                op = IncrementDecrementOperator::minus_minus_prefix;
+            }
+
+            primary_expression = new Variable(Type::Unknown, current_token);
+
+            after = new StatementList(
+                    new IncrementDecrementExpression((Variable *) primary_expression, op, false));
+            parser::stream->jump(1);
+
+        } else {
+            addError("Identifier or integer", current_token);
+            parser::stream->jump(1);
+            return std::make_tuple(nullptr, nullptr, nullptr);
+        }
+
+        if (needFurtherParsing) {
+            int min_precedence = ComputableExpression::getOperatorPrecedence(current_token->type);
+
+            ComputableExpression *computableExpression = _parseExpression(primary_expression, min_precedence, true);
+            StatementList *beforeStatements = computableExpression->getBeforeStatements();
+            StatementList *afterStatements = computableExpression->getAfterStatements();
+
+            if (before != nullptr) {
+                beforeStatements->addStatement(before->getStatements()->back());
+                delete before;
+            }
+
+            if (after != nullptr) {
+                afterStatements->addStatement(after->getStatements()->back());
+                delete after;
+            }
+
+            computableExpression->emptyBeforeAndAfter();
+
+            return std::make_tuple(computableExpression, beforeStatements, afterStatements);
+        } else {
+            return std::make_tuple(primary_expression, before, after);
+        }
+    };
+
+    _parseExpression = [&](Expression *lhs, int min_precedence, bool in_scope) -> ComputableExpression * {
+        auto *before = new StatementList();
+        auto *after = new StatementList();
+
+
+        Token *lookAhead = parser::stream->peakNext();
+
+        while (ComputableExpression::getOperatorPrecedence(lookAhead->type) >= min_precedence) {
+            Token *op = lookAhead;
+            parser::stream->jump(1);
+            auto[rhs, beforeStatements, afterStatements] = parsePrimary();
+
+            if (beforeStatements != nullptr) {
+                auto statements = beforeStatements->getStatements();
+                for (auto statement: *statements) {
+                    before->addStatement(statement);
+                }
+
+                delete beforeStatements;
+            }
+
+            if (afterStatements != nullptr) {
+                auto statements = afterStatements->getStatements();
+                for (auto statement: *statements) {
+                    after->addStatement(statement);
+                }
+
+                delete afterStatements;
+            }
+
+            lookAhead = parser::stream->peakNext();
+
+            while (ComputableExpression::getOperatorPrecedence(lookAhead->type) >=
+                   ComputableExpression::getOperatorPrecedence(op->type)) {
+                rhs = _parseExpression(rhs, ComputableExpression::getOperatorPrecedence(lookAhead->type), false);
+
+                beforeStatements = ((ComputableExpression *) rhs)->getBeforeStatements();
+                afterStatements = ((ComputableExpression *) rhs)->getAfterStatements();
+
+                if (beforeStatements != nullptr) {
+                    auto statements = beforeStatements->getStatements();
+                    for (auto statement: *statements) {
+                        before->addStatement(statement);
+                    }
+
+                    delete beforeStatements;
+                }
+
+                if (afterStatements != nullptr) {
+                    auto statements = afterStatements->getStatements();
+                    for (auto statement: *statements) {
+                        after->addStatement(statement);
+                    }
+
+                    delete afterStatements;
+                }
+
+                ((ComputableExpression *) rhs)->emptyBeforeAndAfter();
+
+                lookAhead = parser::stream->peakNext();
+            }
+
+            lhs = new ComputableExpression(op, lhs, rhs);
+        }
+
+        ((ComputableExpression *) lhs)->setBefore(before);
+        ((ComputableExpression *) lhs)->setAfter(after);
+
+        return (ComputableExpression *) lhs;
+    };
 }

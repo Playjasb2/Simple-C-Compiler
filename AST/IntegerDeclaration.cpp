@@ -14,8 +14,8 @@ IntegerDeclaration::IntegerDeclaration(Variable *variable, Expression *value): D
 
 }
 
-void IntegerDeclaration::accept(ASTPrinter *printer) {
-    printer->visit(this);
+void IntegerDeclaration::accept(Visitor *visitor) {
+    visitor->visit(this);
 }
 
 

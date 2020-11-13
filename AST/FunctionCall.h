@@ -25,7 +25,7 @@ namespace AST {
         ~FunctionCall() override;
         FunctionCall(Function *function, std::vector<Expression *> *arguments, bool isStatement);
         std::vector<Expression *> *getArguments();
-        void accept(ASTPrinter *printer) override;
+        void accept(Visitor *visitor) override;
     };
 
 }

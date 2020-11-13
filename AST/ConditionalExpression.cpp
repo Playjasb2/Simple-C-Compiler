@@ -12,6 +12,6 @@ ConditionalExpression::ConditionalExpression(Conditional_Operators op, Expressio
 
 }
 
-void ConditionalExpression::accept(ASTPrinter *printer) {
-    printer->visit(this);
+void ConditionalExpression::accept(Visitor *visitor) {
+    visitor->visit(this);
 }
